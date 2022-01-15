@@ -30,7 +30,6 @@ final class ViewController: UIViewController {
         return stack
     }()
 
-
     override func viewDidLayoutSubviews() {
         if hasSetupView { return }
         setupViewStyle()
@@ -39,8 +38,12 @@ final class ViewController: UIViewController {
         hasSetupView = true
     }
 
+    @objc func didTouchUpInsideButton(_ sender: UIButton) {
+        print("Sender title: \(sender.titleLabel?.text)")
+    }
+
     private func setupViewStyle() {
-        view.backgroundColor = .systemGray
+        view.backgroundColor = .darkGray
     }
 
     private func setupViewHierarchy() {
@@ -58,10 +61,12 @@ final class ViewController: UIViewController {
             stack.distribution = .fillEqually
             stack.clipsToBounds = true
             for numberOfColumn in 1...numberOfColumns {
-                let view = UIView()
-                view.clipsToBounds = true
-                view.backgroundColor = (numberOfColumn + numberOfRow) % 2 == 0 ? .white : .darkGray
-                stack.addArrangedSubview(view)
+                let button = UIButton()
+                button.setTitle("(\(numberOfRow),\(numberOfColumn))", for: .normal)
+                button.setTitleColor(.red, for: .normal)
+                button.addTarget(self, action: #selector(didTouchUpInsideButton(_:)), for: .touchUpInside)
+                button.backgroundColor = (numberOfColumn + numberOfRow) % 2 == 0 ? .white : .darkGray
+                stack.addArrangedSubview(button)
             }
             rowsStackView.addArrangedSubview(stack)
         }
