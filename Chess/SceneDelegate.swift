@@ -39,8 +39,8 @@ final class ViewController: UIViewController {
     }
 
     @objc func didTouchUpInsideButton(_ sender: BoardSquareButton) {
-        print("Sender title: \(sender.titleLabel?.text)")
-        print("Sender position: \(sender.getPosition())")
+        print("Sender title: \(String(describing: sender.titleLabel?.text))")
+        print("Sender position: \(String(describing: sender.getPosition()))")
     }
 
     private func setupViewStyle() {
