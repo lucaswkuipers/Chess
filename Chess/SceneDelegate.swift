@@ -11,42 +11,32 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 }
 
-final class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 64
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 50, height: 50)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        let item = indexPath.row
-        if item % 2 == 0 {
-            cell.backgroundColor = .blue
-        } else {
-            cell.backgroundColor = .red
-        }
-        return cell
-    }
-
-    private let boardCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.backgroundColor = .purple
-        view.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+final class ViewController: UIViewController {
+    private var hasSetupView = false
+    private let boardView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 4
+        view.backgroundColor = .brown
+        view.clipsToBounds = true
         return view
     }()
 
+    private let rowsStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = .zero
+        stack.distribution = .fillEqually
+        stack.clipsToBounds = true
+        return stack
+    }()
+
+
     override func viewDidLayoutSubviews() {
-        setupDelegates()
+        if hasSetupView { return }
         setupViewStyle()
         setupViewHierarchy()
         setupViewConstraints()
+        hasSetupView = true
     }
 
     private func setupViewStyle() {
@@ -54,25 +44,49 @@ final class ViewController: UIViewController, UICollectionViewDelegateFlowLayout
     }
 
     private func setupViewHierarchy() {
-        view.addSubview(boardCollectionView)
+        view.addSubview(boardView)
+        boardView.addSubview(rowsStackView)
+
+        if !rowsStackView.arrangedSubviews.isEmpty { return }
+
+        let numberOfRows = 8
+        let numberOfColumns = 8
+        for numberOfRow in 1...numberOfRows {
+            let stack = UIStackView()
+            stack.axis = .horizontal
+            stack.spacing = .zero
+            stack.distribution = .fillEqually
+            stack.clipsToBounds = true
+            for numberOfColumn in 1...numberOfColumns {
+                let view = UIView()
+                view.clipsToBounds = true
+                view.backgroundColor = (numberOfColumn + numberOfRow) % 2 == 0 ? .white : .darkGray
+                stack.addArrangedSubview(view)
+            }
+            rowsStackView.addArrangedSubview(stack)
+        }
     }
 
     private func setupViewConstraints() {
-        view.subviews.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        boardView.translatesAutoresizingMaskIntoConstraints = false
+        rowsStackView.translatesAutoresizingMaskIntoConstraints = false
 
-        let margin = 20.0
+        let margin = 15.0
         let width = view.frame.width - 2 * margin
+        let height = view.frame.height - 2 * margin
+
+        let smallestDimension = min(width, height)
 
         NSLayoutConstraint.activate([
-            boardCollectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            boardCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: margin),
-            boardCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -margin),
-            boardCollectionView.heightAnchor.constraint(equalToConstant: width)
-        ])
-    }
+            boardView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            boardView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            boardView.heightAnchor.constraint(equalToConstant: smallestDimension),
+            boardView.widthAnchor.constraint(equalToConstant: smallestDimension),
 
-    private func setupDelegates() {
-        boardCollectionView.delegate = self
-        boardCollectionView.dataSource = self
+            rowsStackView.topAnchor.constraint(equalTo: boardView.topAnchor, constant: 20),
+            rowsStackView.leftAnchor.constraint(equalTo: boardView.leftAnchor, constant: 20),
+            rowsStackView.bottomAnchor.constraint(equalTo: boardView.bottomAnchor, constant: -20),
+            rowsStackView.rightAnchor.constraint(equalTo: boardView.rightAnchor, constant: -20)
+        ])
     }
 }
