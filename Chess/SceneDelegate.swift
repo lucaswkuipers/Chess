@@ -38,8 +38,9 @@ final class ViewController: UIViewController {
         hasSetupView = true
     }
 
-    @objc func didTouchUpInsideButton(_ sender: UIButton) {
+    @objc func didTouchUpInsideButton(_ sender: BoardSquareButton) {
         print("Sender title: \(sender.titleLabel?.text)")
+        print("Sender position: \(sender.getPosition())")
     }
 
     private func setupViewStyle() {
@@ -61,8 +62,9 @@ final class ViewController: UIViewController {
             stack.distribution = .fillEqually
             stack.clipsToBounds = true
             for numberOfColumn in 1...numberOfColumns {
-                let button = UIButton()
-                button.setTitle("(\(numberOfRow),\(numberOfColumn))", for: .normal)
+                let button = BoardSquareButton(row: numberOfRow, column: numberOfColumn)
+                button.setTitle(button.getPosition(), for: .normal)
+//                button.setTitle("(\(numberOfRow),\(numberOfColumn))", for: .normal)
                 button.setTitleColor(.red, for: .normal)
                 button.addTarget(self, action: #selector(didTouchUpInsideButton(_:)), for: .touchUpInside)
                 button.backgroundColor = (numberOfColumn + numberOfRow) % 2 == 0 ? .white : .darkGray
@@ -93,5 +95,30 @@ final class ViewController: UIViewController {
             rowsStackView.bottomAnchor.constraint(equalTo: boardView.bottomAnchor, constant: -20),
             rowsStackView.rightAnchor.constraint(equalTo: boardView.rightAnchor, constant: -20)
         ])
+    }
+}
+
+final class BoardSquareButton: UIButton {
+    private let files = ["a", "b", "c", "d", "e", "f", "g", "h"]
+    var row: Int?
+    var column: Int?
+
+    init(row: Int, column: Int) {
+        self.row = row
+        self.column = column
+        super.init(frame: .zero)
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
+    func getPosition() -> String? {
+        guard let row = row,
+              let column = column else { return nil }
+
+        let rank = 9 - row
+        let file = files[column - 1]
+        return "\(file)\(rank)"
     }
 }
