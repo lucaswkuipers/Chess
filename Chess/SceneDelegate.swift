@@ -12,12 +12,19 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 }
 
 final class ViewController: UIViewController {
+    private var squares: [[String]] = [["r", "n", "b", "q", "k", "b", "n", "r"],
+                                         ["p", "p", "p", "p", "p", "p", "p", "p"],
+                                         ["", "", "", "", "", "", "", ""],
+                                         ["", "", "", "", "", "", "", ""],
+                                         ["", "", "", "", "", "", "", ""],
+                                         ["", "", "", "", "", "", "", ""],
+                                         ["P", "P", "P", "P", "P", "P", "P", "P"],
+                                         ["R", "N", "B", "Q", "K", "B", "N", "R"]]
     private var hasSetupView = false
     private let boardView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 4
         view.backgroundColor = .brown
-        view.clipsToBounds = true
         return view
     }()
 
@@ -26,7 +33,6 @@ final class ViewController: UIViewController {
         stack.axis = .vertical
         stack.spacing = .zero
         stack.distribution = .fillEqually
-        stack.clipsToBounds = true
         return stack
     }()
 
@@ -60,12 +66,15 @@ final class ViewController: UIViewController {
             stack.axis = .horizontal
             stack.spacing = .zero
             stack.distribution = .fillEqually
-            stack.clipsToBounds = true
             for numberOfColumn in 1...numberOfColumns {
                 let button = BoardSquareButton(row: numberOfRow, column: numberOfColumn)
-                button.setTitle(button.getPosition(), for: .normal)
-//                button.setTitle("(\(numberOfRow),\(numberOfColumn))", for: .normal)
-                button.setTitleColor(.red, for: .normal)
+                let piece = squares[numberOfRow - 1][numberOfColumn - 1]
+                button.setTitle(piece, for: .normal)
+                if !piece.isEmpty {
+                    let color: UIColor = Character(piece).isUppercase ? .blue : .red
+                    button.setTitleColor(color, for: .normal)
+                }
+
                 button.addTarget(self, action: #selector(didTouchUpInsideButton(_:)), for: .touchUpInside)
                 button.backgroundColor = (numberOfColumn + numberOfRow) % 2 == 0 ? .white : .darkGray
                 stack.addArrangedSubview(button)
@@ -81,7 +90,6 @@ final class ViewController: UIViewController {
         let margin = 15.0
         let width = view.frame.width - 2 * margin
         let height = view.frame.height - 2 * margin
-
         let smallestDimension = min(width, height)
 
         NSLayoutConstraint.activate([
@@ -100,23 +108,23 @@ final class ViewController: UIViewController {
 
 final class BoardSquareButton: UIButton {
     private let files = ["a", "b", "c", "d", "e", "f", "g", "h"]
-    var row: Int?
-    var column: Int?
+    var row: Int
+    var column: Int
 
     init(row: Int, column: Int) {
         self.row = row
         self.column = column
         super.init(frame: .zero)
+        titleLabel?.font = .boldSystemFont(ofSize: 18)
     }
 
     required init?(coder: NSCoder) {
+        self.row = -1
+        self.column = -1
         super.init(coder: coder)
     }
 
-    func getPosition() -> String? {
-        guard let row = row,
-              let column = column else { return nil }
-
+    func getPosition() -> String {
         let rank = 9 - row
         let file = files[column - 1]
         return "\(file)\(rank)"
