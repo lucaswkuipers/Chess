@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC1CF396279379230092425B /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1CF395279379220092425B /* GameView.swift */; };
 		ECBE6A9227921CA8004263D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBE6A9127921CA8004263D7 /* AppDelegate.swift */; };
 		ECBE6A9427921CA8004263D7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBE6A9327921CA8004263D7 /* SceneDelegate.swift */; };
 		ECBE6A9B27921CAB004263D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECBE6A9A27921CAB004263D7 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EC1CF395279379220092425B /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		ECBE6A8E27921CA8004263D7 /* Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECBE6A9127921CA8004263D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECBE6A9327921CA8004263D7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 				ECBE6A9A27921CAB004263D7 /* Assets.xcassets */,
 				ECBE6A9C27921CAB004263D7 /* LaunchScreen.storyboard */,
 				ECBE6A9F27921CAB004263D7 /* Info.plist */,
+				EC1CF395279379220092425B /* GameView.swift */,
 			);
 			path = Chess;
 			sourceTree = "<group>";
@@ -132,6 +135,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECBE6A9227921CA8004263D7 /* AppDelegate.swift in Sources */,
+				EC1CF396279379230092425B /* GameView.swift in Sources */,
 				ECBE6A9427921CA8004263D7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
