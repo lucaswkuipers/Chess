@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		EC1CF396279379230092425B /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1CF395279379220092425B /* GameView.swift */; };
+		EC7497622794B803002F43AC /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497612794B803002F43AC /* Piece.swift */; };
+		EC7497642794B80D002F43AC /* PieceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497632794B80D002F43AC /* PieceType.swift */; };
+		EC7497662794B814002F43AC /* PieceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497652794B814002F43AC /* PieceColor.swift */; };
+		EC7497682794C024002F43AC /* GenericViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497672794C024002F43AC /* GenericViewController.swift */; };
+		EC74976A2794C136002F43AC /* GameComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497692794C136002F43AC /* GameComposer.swift */; };
+		EC74976C2794C161002F43AC /* GameAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC74976B2794C161002F43AC /* GameAdapter.swift */; };
+		EC74976E2794CE39002F43AC /* Array+subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC74976D2794CE39002F43AC /* Array+subscript.swift */; };
+		EC7497712794D411002F43AC /* PieceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497702794D411002F43AC /* PieceParser.swift */; };
 		ECBE6A9227921CA8004263D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBE6A9127921CA8004263D7 /* AppDelegate.swift */; };
 		ECBE6A9427921CA8004263D7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBE6A9327921CA8004263D7 /* SceneDelegate.swift */; };
 		ECBE6A9B27921CAB004263D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECBE6A9A27921CAB004263D7 /* Assets.xcassets */; };
@@ -16,6 +24,14 @@
 
 /* Begin PBXFileReference section */
 		EC1CF395279379220092425B /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		EC7497612794B803002F43AC /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
+		EC7497632794B80D002F43AC /* PieceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceType.swift; sourceTree = "<group>"; };
+		EC7497652794B814002F43AC /* PieceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceColor.swift; sourceTree = "<group>"; };
+		EC7497672794C024002F43AC /* GenericViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericViewController.swift; sourceTree = "<group>"; };
+		EC7497692794C136002F43AC /* GameComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameComposer.swift; sourceTree = "<group>"; };
+		EC74976B2794C161002F43AC /* GameAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAdapter.swift; sourceTree = "<group>"; };
+		EC74976D2794CE39002F43AC /* Array+subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+subscript.swift"; sourceTree = "<group>"; };
+		EC7497702794D411002F43AC /* PieceParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceParser.swift; sourceTree = "<group>"; };
 		ECBE6A8E27921CA8004263D7 /* Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECBE6A9127921CA8004263D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECBE6A9327921CA8004263D7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -35,6 +51,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC74975D2794B141002F43AC /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				EC1CF395279379220092425B /* GameView.swift */,
+				EC7497692794C136002F43AC /* GameComposer.swift */,
+				EC74976B2794C161002F43AC /* GameAdapter.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		EC74975E2794B149002F43AC /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				ECBE6A9127921CA8004263D7 /* AppDelegate.swift */,
+				ECBE6A9327921CA8004263D7 /* SceneDelegate.swift */,
+				EC7497672794C024002F43AC /* GenericViewController.swift */,
+				ECBE6A9A27921CAB004263D7 /* Assets.xcassets */,
+				ECBE6A9C27921CAB004263D7 /* LaunchScreen.storyboard */,
+				ECBE6A9F27921CAB004263D7 /* Info.plist */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		EC7497602794B7F0002F43AC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EC7497612794B803002F43AC /* Piece.swift */,
+				EC7497632794B80D002F43AC /* PieceType.swift */,
+				EC7497652794B814002F43AC /* PieceColor.swift */,
+				EC7497702794D411002F43AC /* PieceParser.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EC74976F2794CE57002F43AC /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				EC74976D2794CE39002F43AC /* Array+subscript.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		ECBE6A8527921CA8004263D7 = {
 			isa = PBXGroup;
 			children = (
@@ -54,12 +112,10 @@
 		ECBE6A9027921CA8004263D7 /* Chess */ = {
 			isa = PBXGroup;
 			children = (
-				ECBE6A9127921CA8004263D7 /* AppDelegate.swift */,
-				ECBE6A9327921CA8004263D7 /* SceneDelegate.swift */,
-				ECBE6A9A27921CAB004263D7 /* Assets.xcassets */,
-				ECBE6A9C27921CAB004263D7 /* LaunchScreen.storyboard */,
-				ECBE6A9F27921CAB004263D7 /* Info.plist */,
-				EC1CF395279379220092425B /* GameView.swift */,
+				EC74976F2794CE57002F43AC /* Helper */,
+				EC74975E2794B149002F43AC /* Application */,
+				EC7497602794B7F0002F43AC /* Model */,
+				EC74975D2794B141002F43AC /* Game */,
 			);
 			path = Chess;
 			sourceTree = "<group>";
@@ -134,9 +190,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC7497622794B803002F43AC /* Piece.swift in Sources */,
 				ECBE6A9227921CA8004263D7 /* AppDelegate.swift in Sources */,
+				EC74976C2794C161002F43AC /* GameAdapter.swift in Sources */,
+				EC7497642794B80D002F43AC /* PieceType.swift in Sources */,
 				EC1CF396279379230092425B /* GameView.swift in Sources */,
+				EC7497662794B814002F43AC /* PieceColor.swift in Sources */,
+				EC7497712794D411002F43AC /* PieceParser.swift in Sources */,
+				EC7497682794C024002F43AC /* GenericViewController.swift in Sources */,
+				EC74976E2794CE39002F43AC /* Array+subscript.swift in Sources */,
 				ECBE6A9427921CA8004263D7 /* SceneDelegate.swift in Sources */,
+				EC74976A2794C136002F43AC /* GameComposer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,10 +343,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AR7T5G5Z83;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Chess/Info.plist;
+				INFOPLIST_FILE = Chess/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -308,10 +372,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AR7T5G5Z83;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Chess/Info.plist;
+				INFOPLIST_FILE = Chess/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
