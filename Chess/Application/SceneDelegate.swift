@@ -10,18 +10,3 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
     }
 }
-
-//final class ViewController: UIViewController {
-//    private var hasSetupView = false
-//
-//    override func viewDidLayoutSubviews() {
-//        if hasSetupView { return }
-//        guard let view = view as? GameView else { return }
-//        view.setupData()
-//        hasSetupView = true
-//    }
-//
-//    override func loadView() {
-//        view = GameView()
-//    }
-//}
