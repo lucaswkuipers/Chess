@@ -5,8 +5,12 @@ struct GameComposer {
         let view = GameView()
         let viewController = GenericViewController(with: view)
         let adapter = GameAdapter()
+        let brain = GameBrain()
 
+        adapter.brain = brain
         adapter.view = view
+
+        view.delegate = adapter
         viewController.delegate = adapter
 
         return viewController

@@ -1,12 +1,12 @@
 final class GameBrain: GameBrainProtocol {
-
-    var pieces: [[Piece]] = []
+    private var startingPieces = PieceParser.getPieceBoard(from: BoardInitialLayoutVariant.standard.pieces)
+    private var pieces =  PieceParser.getPieceBoard(from: BoardInitialLayoutVariant.standard.pieces)
 
     func getStartingPieces() -> [[Piece]] {
-        return pieces
+        return startingPieces
     }
 
-    func didSelect(row: Int, column: Int) {
-        print("Did select row: \(row), column: \(column)")
+    func didSelect(position: Position) {
+        print("GameBrain: Did tap board spot of row: \(position.row), column: \(position.column)")
     }
 }

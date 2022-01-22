@@ -33,6 +33,6 @@ final class SpotButton: UIButton {
     }
 
     private func setBackgroundColor(for position: Position) {
-        defaultColor = (position.row + position.column) % 2 == 0 ? .black : .white
+        defaultColor = (position.row + position.column) % 2 == 0 ? .systemBrown : .white
     }
 }

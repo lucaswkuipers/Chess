@@ -1,6 +1,11 @@
 import UIKit
 
+protocol GameViewDelegate: AnyObject {
+    func didSelect(position: Position)
+}
+
 final class GameView: UIView {
+    weak var delegate: GameViewDelegate?
     private var board: [[Piece]] = []
 
     private let boardView: UIView = {
@@ -31,13 +36,13 @@ final class GameView: UIView {
         super.init(coder: coder)
     }
 
-    func setBoard(from board: [[Piece]]) {
+    func setBoard(to board: [[Piece]]) {
         self.board = board
         renderPieces(from: board)
     }
 
     @objc func didTapBoardSpot(_ sender: SpotButton) {
-        print("Did tap board spot of row: \(sender.position.row), column: \(sender.position.column)")
+        delegate?.didSelect(position: sender.position)
     }
 
     private func setupViewStyle() {
