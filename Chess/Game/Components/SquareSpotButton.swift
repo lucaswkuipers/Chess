@@ -1,29 +1,13 @@
 import UIKit
 
-final class SquareSpotButton: UIButton {
-    enum SpotState {
-        case origin
-        case destination
-        case valid
-        case `default`
+final class SpotButton: UIButton {
+    let position: Position
 
-        var color: UIColor? {
-            switch self {
-            case .origin:
-                return .systemBlue
-            case .destination:
-                return .systemYellow
-            case .valid:
-                return .systemGreen
-            case .default:
-                return nil
-            }
+    var defaultColor: UIColor? {
+        didSet {
+            backgroundColor = defaultColor
         }
     }
-
-    let defaultColor: UIColor
-    let row: Int
-    let column: Int
 
     var spotState: SpotState = .default {
         didSet {
@@ -38,15 +22,17 @@ final class SquareSpotButton: UIButton {
         }
     }
 
-    init(row: Int, column: Int) {
-        self.row  = row
-        self.column = column
-        self.defaultColor = (column + row) % 2 == 0 ? .white : .black
+    init(on position: Position) {
+        self.position = position
         super.init(frame: .zero)
-        backgroundColor = defaultColor
+        setBackgroundColor(for: position)
     }
 
     required init?(coder: NSCoder) {
         fatalError("Init of element not available through coder (you can't use .Xibs / .Storyboards, only init it programmatically)")
+    }
+
+    private func setBackgroundColor(for position: Position) {
+        defaultColor = (position.row + position.column) % 2 == 0 ? .black : .white
     }
 }

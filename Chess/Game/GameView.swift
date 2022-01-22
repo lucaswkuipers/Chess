@@ -36,8 +36,8 @@ final class GameView: UIView {
         renderPieces(from: board)
     }
 
-    @objc func didTapBoardSquare() {
-        print("Did tap board square")
+    @objc func didTapBoardSpot(_ sender: SpotButton) {
+        print("Did tap board spot of row: \(sender.position.row), column: \(sender.position.column)")
     }
 
     private func setupViewStyle() {
@@ -66,7 +66,7 @@ final class GameView: UIView {
     }
 
     private func setupBoardView() {
-        for rowNumber in 1...8 {
+        for rowNumber in 0..<8 {
             rowStackView.addArrangedSubview(makeColumnStackView(for: rowNumber))
         }
     }
@@ -75,7 +75,7 @@ final class GameView: UIView {
         for (rowNumber, row) in rowStackView.arrangedSubviews.enumerated() {
             guard let columnStackView = row as? UIStackView else { return }
             for (columnNumber, column) in columnStackView.arrangedSubviews.enumerated() {
-                guard let button = column as? SquareSpotButton else { return }
+                guard let button = column as? SpotButton else { return }
                 guard let piece = board[safeIndex: rowNumber]?[safeIndex: columnNumber] else { continue }
                 button.piece = piece
             }
@@ -88,20 +88,20 @@ final class GameView: UIView {
         stack.spacing = .zero
         stack.distribution = .fillEqually
 
-        for columnNumber in 1...8 {
-            stack.addArrangedSubview(makeSquareButton(row: rowNumber, column: columnNumber))
+        for columnNumber in 0..<8 {
+            stack.addArrangedSubview(makeSpotButton(row: rowNumber, column: columnNumber))
         }
         return stack
     }
 
-    private func makeSquareButton(row: Int, column: Int) -> SquareSpotButton {
-        let button = SquareSpotButton(row: row, column: column)
-        button.addTarget(self, action: #selector(didTapBoardSquare), for: .touchUpInside)
+    private func makeSpotButton(row: Int, column: Int) -> SpotButton {
+        let button = SpotButton(on: Position(row: row, column: column))
+        button.addTarget(self, action: #selector(didTapBoardSpot(_:)), for: .touchUpInside)
         return button
     }
 }
 
-extension GameView: GameAdapterView {
+extension GameView: GameViewProtocol {
     func prepareLayout() {
         setupViewConstraints()
     }
