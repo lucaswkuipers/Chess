@@ -30,6 +30,9 @@ final class GameAdapter {
 extension GameAdapter: GenericViewControllerDelegate {
     func viewDidLayoutSubviews() {
         prepareLayout()
+    }
+
+    func viewWillAppear() {
         setupBoard()
     }
 }
