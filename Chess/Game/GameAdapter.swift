@@ -1,13 +1,17 @@
+protocol GameAdapterView {
+    func prepareLayout()
+}
+
 final class GameAdapter {
     var didSetupData = false
-    var view: GameView?
+    var view: GameAdapterView?
     var controller: GenericViewController?
 }
 
 extension GameAdapter: GenericViewControllerDelegate {
     func viewDidLayoutSubviews() {
         if didSetupData { return }
-        view?.setupData()
+        view?.prepareLayout()
         didSetupData = true
     }
 }

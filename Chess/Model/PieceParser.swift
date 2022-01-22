@@ -5,12 +5,10 @@ struct PieceParser {
             var pieceRow: [Piece] = []
             for stringPiece in row {
                 let separatedString = stringPiece.split(separator: "_").map(String.init)
-
                 guard let pieceColorRawValue = separatedString.first,
                       let pieceTypeRawValue = separatedString.last,
                       let pieceColor = PieceColor(rawValue: pieceColorRawValue),
                       let pieceType = PieceType(rawValue: pieceTypeRawValue) else { continue }
-
                 let piece = Piece(type: pieceType, color: pieceColor)
                 pieceRow.append(piece)
             }

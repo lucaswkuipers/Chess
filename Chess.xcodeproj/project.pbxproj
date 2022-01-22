@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EC1CF396279379230092425B /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1CF395279379220092425B /* GameView.swift */; };
+		EC1CF396279379230092425B /* GameViewOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1CF395279379220092425B /* GameViewOld.swift */; };
 		EC7497622794B803002F43AC /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497612794B803002F43AC /* Piece.swift */; };
 		EC7497642794B80D002F43AC /* PieceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497632794B80D002F43AC /* PieceType.swift */; };
 		EC7497662794B814002F43AC /* PieceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497652794B814002F43AC /* PieceColor.swift */; };
@@ -16,6 +16,8 @@
 		EC74976C2794C161002F43AC /* GameAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC74976B2794C161002F43AC /* GameAdapter.swift */; };
 		EC74976E2794CE39002F43AC /* Array+subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC74976D2794CE39002F43AC /* Array+subscript.swift */; };
 		EC7497712794D411002F43AC /* PieceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497702794D411002F43AC /* PieceParser.swift */; };
+		EC8ACDFA279A670A00A7D854 /* AppWindowComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8ACDF9279A670A00A7D854 /* AppWindowComposer.swift */; };
+		EC8ACDFC279A6A3C00A7D854 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8ACDFB279A6A3C00A7D854 /* GameView.swift */; };
 		ECBE6A9227921CA8004263D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBE6A9127921CA8004263D7 /* AppDelegate.swift */; };
 		ECBE6A9427921CA8004263D7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBE6A9327921CA8004263D7 /* SceneDelegate.swift */; };
 		ECBE6A9B27921CAB004263D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECBE6A9A27921CAB004263D7 /* Assets.xcassets */; };
@@ -23,7 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EC1CF395279379220092425B /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		EC1CF395279379220092425B /* GameViewOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewOld.swift; sourceTree = "<group>"; };
 		EC7497612794B803002F43AC /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
 		EC7497632794B80D002F43AC /* PieceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceType.swift; sourceTree = "<group>"; };
 		EC7497652794B814002F43AC /* PieceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceColor.swift; sourceTree = "<group>"; };
@@ -32,6 +34,8 @@
 		EC74976B2794C161002F43AC /* GameAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAdapter.swift; sourceTree = "<group>"; };
 		EC74976D2794CE39002F43AC /* Array+subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+subscript.swift"; sourceTree = "<group>"; };
 		EC7497702794D411002F43AC /* PieceParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceParser.swift; sourceTree = "<group>"; };
+		EC8ACDF9279A670A00A7D854 /* AppWindowComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWindowComposer.swift; sourceTree = "<group>"; };
+		EC8ACDFB279A6A3C00A7D854 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		ECBE6A8E27921CA8004263D7 /* Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECBE6A9127921CA8004263D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECBE6A9327921CA8004263D7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,9 +58,10 @@
 		EC74975D2794B141002F43AC /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				EC1CF395279379220092425B /* GameView.swift */,
+				EC1CF395279379220092425B /* GameViewOld.swift */,
 				EC7497692794C136002F43AC /* GameComposer.swift */,
 				EC74976B2794C161002F43AC /* GameAdapter.swift */,
+				EC8ACDFB279A6A3C00A7D854 /* GameView.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -66,6 +71,7 @@
 			children = (
 				ECBE6A9127921CA8004263D7 /* AppDelegate.swift */,
 				ECBE6A9327921CA8004263D7 /* SceneDelegate.swift */,
+				EC8ACDF9279A670A00A7D854 /* AppWindowComposer.swift */,
 				EC7497672794C024002F43AC /* GenericViewController.swift */,
 				ECBE6A9A27921CAB004263D7 /* Assets.xcassets */,
 				ECBE6A9C27921CAB004263D7 /* LaunchScreen.storyboard */,
@@ -191,14 +197,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC7497622794B803002F43AC /* Piece.swift in Sources */,
+				EC8ACDFA279A670A00A7D854 /* AppWindowComposer.swift in Sources */,
 				ECBE6A9227921CA8004263D7 /* AppDelegate.swift in Sources */,
 				EC74976C2794C161002F43AC /* GameAdapter.swift in Sources */,
 				EC7497642794B80D002F43AC /* PieceType.swift in Sources */,
-				EC1CF396279379230092425B /* GameView.swift in Sources */,
+				EC1CF396279379230092425B /* GameViewOld.swift in Sources */,
 				EC7497662794B814002F43AC /* PieceColor.swift in Sources */,
 				EC7497712794D411002F43AC /* PieceParser.swift in Sources */,
 				EC7497682794C024002F43AC /* GenericViewController.swift in Sources */,
 				EC74976E2794CE39002F43AC /* Array+subscript.swift in Sources */,
+				EC8ACDFC279A6A3C00A7D854 /* GameView.swift in Sources */,
 				ECBE6A9427921CA8004263D7 /* SceneDelegate.swift in Sources */,
 				EC74976A2794C136002F43AC /* GameComposer.swift in Sources */,
 			);
@@ -339,6 +347,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AR7T5G5Z83;
@@ -354,8 +363,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = lucaswkuipers.Chess;
+				PRODUCT_BUNDLE_IDENTIFIER = "lucaswkuipers.Swifty-Chess";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -383,7 +393,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = lucaswkuipers.Chess;
+				PRODUCT_BUNDLE_IDENTIFIER = "lucaswkuipers.Swifty-Chess";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
