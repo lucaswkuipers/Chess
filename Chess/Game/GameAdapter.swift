@@ -1,10 +1,12 @@
 protocol GameViewProtocol {
     func prepareLayout()
     func setBoard(to board: [[Spot]])
+    func rotateBoard()
 }
 
 protocol GameBrainProtocol {
     func getStartingBoard() -> [[Spot]]
+    func getStartingPlayer() -> Player
     func didSelect(position: Position)
 }
 
@@ -23,7 +25,11 @@ final class GameAdapter {
 
     func setupBoard() {
         guard let startingBoard = brain?.getStartingBoard() else { return }
+        let startingPlayer = brain?.getStartingPlayer()
         view?.setBoard(to: startingBoard)
+        if startingPlayer == .top {
+            view?.rotateBoard()
+        }
     }
 }
 
@@ -46,5 +52,9 @@ extension GameAdapter: GameViewDelegate {
 extension GameAdapter: GameBrainDelegate {
     func setBoard(to board: [[Spot]]) {
         view?.setBoard(to: board)
+    }
+
+    func rotateBoard() {
+        view?.rotateBoard()
     }
 }

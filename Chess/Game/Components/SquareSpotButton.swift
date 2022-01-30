@@ -35,6 +35,12 @@ final class SpotButton: UIButton {
         fatalError("Init of element not available through coder (you can't use .Xibs / .Storyboards, only init it programmatically)")
     }
 
+    func rotate() {
+        UIView.animate(withDuration: 1, delay: 0, options: [.preferredFramesPerSecond60, .curveEaseInOut], animations: {
+            self.imageView?.transform = self.imageView?.transform.rotated(by: .pi) ?? .identity
+        }, completion: nil)
+    }
+
     private func setBackgroundColor(for position: Position) {
         defaultColor = (position.row + position.column) % 2 == 0 ? .systemBrown : .white
     }

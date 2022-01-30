@@ -1,15 +1,17 @@
+import Foundation
+
 protocol GameBrainDelegate {
     func setBoard(to board: [[Spot]])
+    func rotateBoard()
 }
 
 final class GameBrain: GameBrainProtocol {
-    var playerTurn: Player = .bottom
-    var startingPlayer: Player = .bottom
-    var playerTurnColor: PieceColor {
-        return playerTurn == startingPlayer ? .white : .black
-    }
-
     var delegate: GameBrainDelegate?
+    private var playerTurn: Player = .bottom
+    private var startingPlayer: Player = .bottom
+    private var origin: Position?
+    private var destination: Position?
+    private var validMoves: [Position] = []
     private var startingBoard = PieceParser.getBoard(from: BoardInitialLayoutVariant.standard.pieces)
     private var board =  PieceParser.getBoard(from: BoardInitialLayoutVariant.standard.pieces)
     private var numberOfRows: Int {
@@ -18,12 +20,17 @@ final class GameBrain: GameBrainProtocol {
     private var numberOfColumns: Int {
         board.first?.count ?? 0
     }
-    private var origin: Position?
-    private var destination: Position?
-    private var validMoves: [Position] = []
+
+    private var playerTurnColor: PieceColor {
+        return playerTurn == startingPlayer ? .white : .black
+    }
 
     func getStartingBoard() -> [[Spot]] {
         return startingBoard
+    }
+
+    func getStartingPlayer() -> Player {
+        return startingPlayer
     }
 
     func didSelect(position: Position) {
@@ -98,6 +105,10 @@ final class GameBrain: GameBrainProtocol {
         destination = nil
         printBoard() // log purposes (visualize what should be happening)
         playerTurn = playerTurn == .bottom ? .top : .bottom
+        delegate?.setBoard(to: board)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.delegate?.rotateBoard()
+         }
     }
 
     private func setPiece(_ piece: Piece?, to position: Position?) {

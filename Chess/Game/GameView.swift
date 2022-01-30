@@ -103,6 +103,16 @@ final class GameView: UIView {
 }
 
 extension GameView: GameViewProtocol {
+    func rotateBoard() {
+        for row in rowStackView.arrangedSubviews {
+            guard let spotStackView = row as? UIStackView else { return }
+            for column in spotStackView.arrangedSubviews {
+                guard let button = column as? SpotButton else { continue }
+                button.rotate()
+            }
+        }
+    }
+
     func setBoard(to board: [[Spot]]) {
         self.board = board
         renderPieces()
