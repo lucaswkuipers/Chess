@@ -3,6 +3,12 @@ protocol GameBrainDelegate {
 }
 
 final class GameBrain: GameBrainProtocol {
+    var playerTurn: Player = .bottom
+    var startingPlayer: Player = .bottom
+    var playerTurnColor: PieceColor {
+        return playerTurn == startingPlayer ? .white : .black
+    }
+
     var delegate: GameBrainDelegate?
     private var startingBoard = PieceParser.getBoard(from: BoardInitialLayoutVariant.standard.pieces)
     private var board =  PieceParser.getBoard(from: BoardInitialLayoutVariant.standard.pieces)
@@ -23,9 +29,11 @@ final class GameBrain: GameBrainProtocol {
     func didSelect(position: Position) {
         if origin == nil {
             if isSpotSelectedEmpty(on: position) { return }
-            origin = position
-            setValidMoves(with: position)
-            setState(.origin, to: position)
+            if getPiece(from: position)?.color == playerTurnColor {
+                origin = position
+                setValidMoves(with: position)
+                setState(.origin, to: position)
+            }
         } else {
             if position == origin { return }
             let destinationPiece = getPiece(from: position)
@@ -89,6 +97,7 @@ final class GameBrain: GameBrainProtocol {
         origin = nil
         destination = nil
         printBoard() // log purposes (visualize what should be happening)
+        playerTurn = playerTurn == .bottom ? .top : .bottom
     }
 
     private func setPiece(_ piece: Piece?, to position: Position?) {
