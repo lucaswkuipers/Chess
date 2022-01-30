@@ -13,6 +13,7 @@
 		EC214556279C6F0B001E7D11 /* SpotState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC214555279C6F0B001E7D11 /* SpotState.swift */; };
 		EC214559279C74E0001E7D11 /* BoardConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC214558279C74E0001E7D11 /* BoardConfiguration.swift */; };
 		EC21455C279C7DA2001E7D11 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC21455B279C7DA2001E7D11 /* Player.swift */; };
+		EC2F343527A7438300ED1992 /* UIColor+appliedOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2F343427A7438300ED1992 /* UIColor+appliedOverlay.swift */; };
 		EC7497622794B803002F43AC /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497612794B803002F43AC /* Piece.swift */; };
 		EC7497642794B80D002F43AC /* PieceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497632794B80D002F43AC /* PieceType.swift */; };
 		EC7497662794B814002F43AC /* PieceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497652794B814002F43AC /* PieceColor.swift */; };
@@ -39,6 +40,7 @@
 		EC214555279C6F0B001E7D11 /* SpotState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotState.swift; sourceTree = "<group>"; };
 		EC214558279C74E0001E7D11 /* BoardConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardConfiguration.swift; sourceTree = "<group>"; };
 		EC21455B279C7DA2001E7D11 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		EC2F343427A7438300ED1992 /* UIColor+appliedOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+appliedOverlay.swift"; sourceTree = "<group>"; };
 		EC7497612794B803002F43AC /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
 		EC7497632794B80D002F43AC /* PieceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceType.swift; sourceTree = "<group>"; };
 		EC7497652794B814002F43AC /* PieceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceColor.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				EC74976D2794CE39002F43AC /* Array+subscript.swift */,
+				EC2F343427A7438300ED1992 /* UIColor+appliedOverlay.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				EC7497712794D411002F43AC /* PieceParser.swift in Sources */,
 				EC7497682794C024002F43AC /* GenericViewController.swift in Sources */,
 				ECC974CB279F191C002E81DE /* Spot.swift in Sources */,
+				EC2F343527A7438300ED1992 /* UIColor+appliedOverlay.swift in Sources */,
 				EC74976E2794CE39002F43AC /* Array+subscript.swift in Sources */,
 				EC8ACDFC279A6A3C00A7D854 /* GameView.swift in Sources */,
 				EC214552279C6D7A001E7D11 /* Move.swift in Sources */,
