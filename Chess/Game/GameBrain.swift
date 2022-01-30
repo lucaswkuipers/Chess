@@ -53,9 +53,9 @@ final class GameBrain: GameBrainProtocol {
         case .queen:
             validMoves = getValidQueenMoves(from: position)
         case .rook:
-            validMoves = []// getValidRookMoves(from: position)
+            validMoves = getValidRookMoves(from: position)
         case .bishop:
-            validMoves = [] // getValidBishopMoves(from: position)
+            validMoves = getValidBishopMoves(from: position)
         case .knight:
             validMoves = [] // getValidKnightMoves(from: position)
         case .pawn:
@@ -295,6 +295,58 @@ final class GameBrain: GameBrainProtocol {
 
                     rowNumber += 1
                     columnNumber += 1
+                }
+            }
+        }
+        return validMoves
+    }
+
+    private func getValidRookMoves(from position: Position) -> [Position] {
+        let color = getPiece(from: position)?.color
+        var validMoves: [Position] = []
+
+        // White
+        if color == .white {
+            // Up
+            // Check if not at the top
+            if position.row > 0 {
+                for rowNumber in (0...position.row - 1).reversed() {
+                    let move = Position(row: rowNumber, column: position.column)
+                    if getPiece(from: move)?.color == color { break }
+                    validMoves.append(move)
+                    if getPiece(from: move) != nil { break }
+                }
+            }
+            // Down
+            // Check if not at the bottom
+            if position.row < numberOfRows - 1 {
+                for rowNumber in position.row + 1...board.count - 1 {
+                    let move = Position(row: rowNumber, column: position.column)
+                    if getPiece(from: move)?.color == color { break }
+                    validMoves.append(move)
+                    if getPiece(from: move) != nil { break }
+                }
+            }
+
+            // Left
+            // Check if not at border left
+            if position.column > 0 {
+                for columnNumber in (0...position.column - 1).reversed() {
+                    let move = Position(row: position.row, column: columnNumber)
+                    if getPiece(from: move)?.color == color { break }
+                    validMoves.append(move)
+                    if getPiece(from: move) != nil { break }
+                }
+            }
+
+            // Right
+            // Check if not at border right
+            if position.column < numberOfColumns - 1 {
+                for columnNumber in position.column + 1...numberOfColumns - 1 {
+                    let move = Position(row: position.row, column: columnNumber)
+                    if getPiece(from: move)?.color == color { break }
+                    validMoves.append(move)
+                    if getPiece(from: move) != nil { break }
                 }
             }
         }
