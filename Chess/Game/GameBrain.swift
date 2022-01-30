@@ -57,7 +57,7 @@ final class GameBrain: GameBrainProtocol {
         case .bishop:
             validMoves = getValidBishopMoves(from: position)
         case .knight:
-            validMoves = [] // getValidKnightMoves(from: position)
+            validMoves = getValidKnightMoves(from: position)
         case .pawn:
             validMoves = getValidPawnMoves(from: position)
         }
@@ -428,6 +428,66 @@ final class GameBrain: GameBrainProtocol {
             }
         }
         return validMoves
+    }
+
+    private func getValidKnightMoves(from position: Position) -> [Position] {
+        let color = getPiece(from: position)?.color
+        var validMoves: [Position] = []
+
+
+        // 2 up 1 left
+        let twoUpOneLeftMove = Position(row: position.row - 2, column: position.column - 1)
+        if isMoveInBounds(on: twoUpOneLeftMove) && getPiece(from: twoUpOneLeftMove)?.color != color {
+            validMoves.append(twoUpOneLeftMove)
+        }
+
+        // 2 up 1 right
+        let twoUpOneRightMove = Position(row: position.row - 2, column: position.column + 1)
+        if isMoveInBounds(on: twoUpOneRightMove) && getPiece(from: twoUpOneRightMove)?.color != color {
+            validMoves.append(twoUpOneRightMove)
+        }
+
+        // 2 down 1 left
+        let twoDownOneLeftMove = Position(row: position.row + 2, column: position.column - 1)
+        if isMoveInBounds(on: twoDownOneLeftMove) && getPiece(from: twoDownOneLeftMove)?.color != color {
+            validMoves.append(twoDownOneLeftMove)
+        }
+
+        // 2 down 1 right
+        let twoDownOneRightMove = Position(row: position.row + 2, column: position.column + 1)
+        if isMoveInBounds(on: twoDownOneRightMove) && getPiece(from: twoDownOneRightMove)?.color != color {
+            validMoves.append(twoDownOneRightMove)
+        }
+
+        // 2 left 1 up
+        let twoLeftOneUp = Position(row: position.row - 1, column: position.column - 2)
+        if isMoveInBounds(on: twoLeftOneUp) && getPiece(from: twoLeftOneUp)?.color != color {
+            validMoves.append(twoLeftOneUp)
+        }
+
+        // 2 left 1 down
+        let twoLeftOneDown = Position(row: position.row + 1, column: position.column - 2)
+        if isMoveInBounds(on: twoLeftOneDown) && getPiece(from: twoLeftOneDown)?.color != color {
+            validMoves.append(twoLeftOneDown)
+        }
+
+        // 2 right 1 up
+        let twoRightOneUp = Position(row: position.row - 1, column: position.column + 2)
+        if isMoveInBounds(on: twoRightOneUp) && getPiece(from: twoRightOneUp)?.color != color {
+            validMoves.append(twoRightOneUp)
+        }
+
+        // 2 right 1 down
+        let twoRightOneDown = Position(row: position.row + 1, column: position.column + 2)
+        if isMoveInBounds(on: twoRightOneDown) && getPiece(from: twoRightOneDown)?.color != color {
+            validMoves.append(twoRightOneDown)
+        }
+
+        return validMoves
+    }
+
+    private func isMoveInBounds(on position: Position) -> Bool {
+        return position.row < numberOfRows && position.row >= 0 && position.column < numberOfColumns && position.column >= 0
     }
 
     private func getValidPawnMoves(from position: Position) -> [Position] {
