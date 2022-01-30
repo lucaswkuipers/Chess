@@ -182,117 +182,114 @@ final class GameBrain: GameBrainProtocol {
         let color = getPiece(from: position)?.color
         var validMoves: [Position] = []
 
-        // White
-        if color == .white {
-            // Up
-            // Check if not at the top
-            if position.row > 0 {
-                for rowNumber in (0...position.row - 1).reversed() {
-                    let move = Position(row: rowNumber, column: position.column)
-                    if getPiece(from: move)?.color == color { break }
-                    validMoves.append(move)
-                    if getPiece(from: move) != nil { break }
-                }
+        // Up
+        // Check if not at the top
+        if position.row > 0 {
+            for rowNumber in (0...position.row - 1).reversed() {
+                let move = Position(row: rowNumber, column: position.column)
+                if getPiece(from: move)?.color == color { break }
+                validMoves.append(move)
+                if getPiece(from: move) != nil { break }
             }
-            // Down
-            // Check if not at the bottom
-            if position.row < numberOfRows - 1 {
-                for rowNumber in position.row + 1...board.count - 1 {
-                    let move = Position(row: rowNumber, column: position.column)
-                    if getPiece(from: move)?.color == color { break }
-                    validMoves.append(move)
-                    if getPiece(from: move) != nil { break }
-                }
+        }
+        // Down
+        // Check if not at the bottom
+        if position.row < numberOfRows - 1 {
+            for rowNumber in position.row + 1...board.count - 1 {
+                let move = Position(row: rowNumber, column: position.column)
+                if getPiece(from: move)?.color == color { break }
+                validMoves.append(move)
+                if getPiece(from: move) != nil { break }
             }
+        }
 
-            // Left
-            // Check if not at border left
-            if position.column > 0 {
-                for columnNumber in (0...position.column - 1).reversed() {
-                    let move = Position(row: position.row, column: columnNumber)
-                    if getPiece(from: move)?.color == color { break }
-                    validMoves.append(move)
-                    if getPiece(from: move) != nil { break }
-                }
+        // Left
+        // Check if not at border left
+        if position.column > 0 {
+            for columnNumber in (0...position.column - 1).reversed() {
+                let move = Position(row: position.row, column: columnNumber)
+                if getPiece(from: move)?.color == color { break }
+                validMoves.append(move)
+                if getPiece(from: move) != nil { break }
             }
+        }
 
-            // Right
-            // Check if not at border right
-            if position.column < numberOfColumns - 1 {
-                for columnNumber in position.column + 1...numberOfColumns - 1 {
-                    let move = Position(row: position.row, column: columnNumber)
-                    if getPiece(from: move)?.color == color { break }
-                    validMoves.append(move)
-                    if getPiece(from: move) != nil { break }
-                }
+        // Right
+        // Check if not at border right
+        if position.column < numberOfColumns - 1 {
+            for columnNumber in position.column + 1...numberOfColumns - 1 {
+                let move = Position(row: position.row, column: columnNumber)
+                if getPiece(from: move)?.color == color { break }
+                validMoves.append(move)
+                if getPiece(from: move) != nil { break }
             }
+        }
 
-            // Up left
-            // Check if not at upper corner left
-            if position.row > 0 && position.column > 0 {
-                var rowNumber = position.row - 1
-                var columnNumber = position.column - 1
+        // Up left
+        // Check if not at upper corner left
+        if position.row > 0 && position.column > 0 {
+            var rowNumber = position.row - 1
+            var columnNumber = position.column - 1
 
-                while rowNumber >= 0 && columnNumber >= 0 {
-                    let move = Position(row: rowNumber, column: columnNumber)
-                    if getPiece(from: move)?.color == color { break }
-                    validMoves.append(move)
-                    if getPiece(from: move) != nil { break }
+            while rowNumber >= 0 && columnNumber >= 0 {
+                let move = Position(row: rowNumber, column: columnNumber)
+                if getPiece(from: move)?.color == color { break }
+                validMoves.append(move)
+                if getPiece(from: move) != nil { break }
 
-                    rowNumber -= 1
-                    columnNumber -= 1
-                }
+                rowNumber -= 1
+                columnNumber -= 1
             }
+        }
 
-            // Up right
-            // Check if not at upper corner right
-            if position.row > 0 && position.column < numberOfColumns {
-                var rowNumber = position.row - 1
-                var columnNumber = position.column + 1
+        // Up right
+        // Check if not at upper corner right
+        if position.row > 0 && position.column < numberOfColumns {
+            var rowNumber = position.row - 1
+            var columnNumber = position.column + 1
 
-                while rowNumber >= 0 && columnNumber < numberOfColumns {
-                    let move = Position(row: rowNumber, column: columnNumber)
-                    if getPiece(from: move)?.color == color { break }
-                    validMoves.append(move)
-                    if getPiece(from: move) != nil { break }
+            while rowNumber >= 0 && columnNumber < numberOfColumns {
+                let move = Position(row: rowNumber, column: columnNumber)
+                if getPiece(from: move)?.color == color { break }
+                validMoves.append(move)
+                if getPiece(from: move) != nil { break }
 
-                    rowNumber -= 1
-                    columnNumber += 1
-                }
+                rowNumber -= 1
+                columnNumber += 1
             }
+        }
 
-            // Lower left
-            // Check if not at lower corner left
-            if position.row < numberOfRows - 1 && position.column > 0 {
-                var rowNumber = position.row + 1
-                var columnNumber = position.column - 1
+        // Lower left
+        // Check if not at lower corner left
+        if position.row < numberOfRows - 1 && position.column > 0 {
+            var rowNumber = position.row + 1
+            var columnNumber = position.column - 1
 
-                while rowNumber < numberOfRows && columnNumber >= 0 {
-                    let move = Position(row: rowNumber, column: columnNumber)
-                    if getPiece(from: move)?.color == color { break }
-                    validMoves.append(move)
-                    if getPiece(from: move) != nil { break }
+            while rowNumber < numberOfRows && columnNumber >= 0 {
+                let move = Position(row: rowNumber, column: columnNumber)
+                if getPiece(from: move)?.color == color { break }
+                validMoves.append(move)
+                if getPiece(from: move) != nil { break }
 
-                    rowNumber += 1
-                    columnNumber -= 1
-                }
+                rowNumber += 1
+                columnNumber -= 1
             }
+        }
 
-            // Lower right
-            // Check if not at lower corner right
-            if position.row < numberOfRows - 1 && position.column < numberOfColumns - 1 {
-                var rowNumber = position.row + 1
-                var columnNumber = position.column + 1
+        // Lower right
+        // Check if not at lower corner right
+        if position.row < numberOfRows - 1 && position.column < numberOfColumns - 1 {
+            var rowNumber = position.row + 1
+            var columnNumber = position.column + 1
 
-                while rowNumber < numberOfRows && columnNumber < numberOfColumns {
-                    let move = Position(row: rowNumber, column: columnNumber)
-                    if getPiece(from: move)?.color == color { break }
-                    validMoves.append(move)
-                    if getPiece(from: move) != nil { break }
+            while rowNumber < numberOfRows && columnNumber < numberOfColumns {
+                let move = Position(row: rowNumber, column: columnNumber)
+                if getPiece(from: move)?.color == color { break }
+                validMoves.append(move)
+                if getPiece(from: move) != nil { break }
 
-                    rowNumber += 1
-                    columnNumber += 1
-                }
+                rowNumber += 1
+                columnNumber += 1
             }
         }
         return validMoves
