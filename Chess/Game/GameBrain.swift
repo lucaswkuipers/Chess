@@ -34,6 +34,7 @@ final class GameBrain: GameBrainProtocol {
             if destinationPiece?.color == originPiece?.color {
                 origin = position
                 resetStates()
+                setState(.origin, to: position)
                 setValidMoves(with: position)
                 return
             }
