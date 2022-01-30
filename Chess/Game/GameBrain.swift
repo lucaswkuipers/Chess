@@ -15,13 +15,23 @@ final class GameBrain: GameBrainProtocol {
 
     func didSelect(position: Position) {
         if origin == nil {
+            // First selection: Origin
             if getPiece(from: position) == nil { return }
             origin = position
         } else {
+            // Second selection: Destination
+
+            // Validation
+            let destinationPiece = getPiece(from: position)
+            let originPiece = getPiece(from: origin)
+            if destinationPiece?.color == originPiece?.color {
+                origin = position
+                return
+            }
+
+            // Apply changes
             destination = position
-            let piece = getPiece(from: origin)
-            print("Piece set to: \(piece?.type.rawValue)")
-            setPiece(piece, to: destination)
+            setPiece(getPiece(from: origin), to: destination)
             cleanPiece(from: origin)
             origin = nil
             destination = nil

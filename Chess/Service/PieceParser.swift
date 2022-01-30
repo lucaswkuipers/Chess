@@ -12,7 +12,6 @@ struct PieceParser {
                 let piece = makePiece(type: pieceType, color: pieceColor)
                 let spot = Spot(spotState: .default, piece: piece)
                 spotRow.append(spot)
-                print(spotRow)
             }
             board.append(spotRow)
         }

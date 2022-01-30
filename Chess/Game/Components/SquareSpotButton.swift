@@ -17,7 +17,11 @@ final class SpotButton: UIButton {
 
     var piece: Piece? {
         didSet {
-            setImage(UIImage(named: piece?.imageName ?? ""), for: .normal)
+            if let piece = piece {
+                setImage(UIImage(named: piece.imageName), for: .normal)
+            } else {
+                setImage(nil, for: .normal)
+            }
         }
     }
 
@@ -25,7 +29,6 @@ final class SpotButton: UIButton {
         self.position = position
         super.init(frame: .zero)
         setBackgroundColor(for: position)
-        setTitleColor(.red, for: .normal)
     }
 
     required init?(coder: NSCoder) {
