@@ -122,7 +122,7 @@ final class GameBrain: GameBrainProtocol {
         for row in board {
             var line = ""
             for spot in row {
-                let pieceName = spot.piece == nil ? "   " : spot.piece!.abbreviation
+                let pieceName = spot.piece == nil ? "     " : spot.piece!.abbreviation
                 line.append("[\(pieceName)]")
             }
             print(line)
