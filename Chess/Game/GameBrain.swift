@@ -102,7 +102,7 @@ final class GameBrain: GameBrainProtocol {
 
         if position.row >= board.count { return }
         guard let row = board[safeIndex: position.row] else { return }
-        if position.row >= row.count { return }
+        if position.column >= row.count { return }
 
         board[position.row][position.column].spotState = state
         delegate?.setBoard(to: board)
@@ -135,48 +135,45 @@ final class GameBrain: GameBrainProtocol {
         let color = getPiece(from: position)?.color
         var validMoves: [Position] = []
 
-        // White
-        if color == .white {
-            // Front
-            let frontMove = Position(row: position.row - 1, column: position.column)
-            if getPiece(from: frontMove)?.color != color {
-                validMoves.append(frontMove)
-            }
-            // Back
-            let backMove = Position(row: position.row + 1, column: position.column)
-            if getPiece(from: backMove)?.color != color {
-                validMoves.append(backMove)
-            }
-            // Left
-            let leftMove = Position(row: position.row, column: position.column - 1)
-            if getPiece(from: leftMove)?.color != color {
-                validMoves.append(leftMove)
-            }
-            // Right
-            let rightMove = Position(row: position.row, column: position.column + 1)
-            if getPiece(from: rightMove)?.color != color {
-                validMoves.append(rightMove)
-            }
-            // Upper-Left
-            let upperLeftMove = Position(row: position.row - 1, column: position.column - 1)
-            if getPiece(from: upperLeftMove)?.color != color {
-                validMoves.append(upperLeftMove)
-            }
-            // Upper-Right
-            let upperRightMove = Position(row: position.row - 1, column: position.column + 1)
-            if getPiece(from: upperRightMove)?.color != color {
-                validMoves.append(upperRightMove)
-            }
-            // Lower-Left
-            let lowerLeftMove = Position(row: position.row + 1, column: position.column - 1)
-            if getPiece(from: lowerLeftMove)?.color != color {
-                validMoves.append(lowerLeftMove)
-            }
-            // Lower-Right
-            let lowerRightMove = Position(row: position.row + 1, column: position.column + 1)
-            if getPiece(from: lowerRightMove)?.color != color {
-                validMoves.append(lowerRightMove)
-            }
+        // Front
+        let frontMove = Position(row: position.row - 1, column: position.column)
+        if getPiece(from: frontMove)?.color != color {
+            validMoves.append(frontMove)
+        }
+        // Back
+        let backMove = Position(row: position.row + 1, column: position.column)
+        if getPiece(from: backMove)?.color != color {
+            validMoves.append(backMove)
+        }
+        // Left
+        let leftMove = Position(row: position.row, column: position.column - 1)
+        if getPiece(from: leftMove)?.color != color {
+            validMoves.append(leftMove)
+        }
+        // Right
+        let rightMove = Position(row: position.row, column: position.column + 1)
+        if getPiece(from: rightMove)?.color != color {
+            validMoves.append(rightMove)
+        }
+        // Upper-Left
+        let upperLeftMove = Position(row: position.row - 1, column: position.column - 1)
+        if getPiece(from: upperLeftMove)?.color != color {
+            validMoves.append(upperLeftMove)
+        }
+        // Upper-Right
+        let upperRightMove = Position(row: position.row - 1, column: position.column + 1)
+        if getPiece(from: upperRightMove)?.color != color {
+            validMoves.append(upperRightMove)
+        }
+        // Lower-Left
+        let lowerLeftMove = Position(row: position.row + 1, column: position.column - 1)
+        if getPiece(from: lowerLeftMove)?.color != color {
+            validMoves.append(lowerLeftMove)
+        }
+        // Lower-Right
+        let lowerRightMove = Position(row: position.row + 1, column: position.column + 1)
+        if getPiece(from: lowerRightMove)?.color != color {
+            validMoves.append(lowerRightMove)
         }
         return validMoves
     }
