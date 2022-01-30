@@ -1,8 +1,8 @@
 struct PieceParser {
-    static func getPieceBoard(from stringBoard: [[String]]) -> [[Piece]] {
-        var pieceBoard: [[Piece]] = []
+    static func getBoard(from stringBoard: [[String]]) -> [[Spot]] {
+        var board: [[Spot]] = []
         for row in stringBoard {
-            var pieceRow: [Piece] = []
+            var spotRow: [Spot] = []
             for stringPiece in row {
                 let separatedString = stringPiece.split(separator: "_").map(String.init)
                 guard let pieceColorRawValue = separatedString.first,
@@ -10,10 +10,11 @@ struct PieceParser {
                       let pieceColor = PieceColor(rawValue: pieceColorRawValue),
                       let pieceType = PieceType(rawValue: pieceTypeRawValue) else { continue }
                 let piece = Piece(type: pieceType, color: pieceColor)
-                pieceRow.append(piece)
+                let spot = Spot(spotState: .default, piece: piece)
+                spotRow.append(spot)
             }
-            pieceBoard.append(pieceRow)
+            board.append(spotRow)
         }
-        return pieceBoard
+        return board
     }
 }

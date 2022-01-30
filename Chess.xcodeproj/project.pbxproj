@@ -23,10 +23,13 @@
 		EC7497712794D411002F43AC /* PieceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497702794D411002F43AC /* PieceParser.swift */; };
 		EC8ACDFA279A670A00A7D854 /* AppWindowComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8ACDF9279A670A00A7D854 /* AppWindowComposer.swift */; };
 		EC8ACDFC279A6A3C00A7D854 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8ACDFB279A6A3C00A7D854 /* GameView.swift */; };
+		ECA77EE627A6182000EB78C9 /* ClassMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA77EE527A6182000EB78C9 /* ClassMapper.swift */; };
+		ECA77EE927A619F200EB78C9 /* King.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA77EE827A619F200EB78C9 /* King.swift */; };
 		ECBE6A9227921CA8004263D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBE6A9127921CA8004263D7 /* AppDelegate.swift */; };
 		ECBE6A9427921CA8004263D7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBE6A9327921CA8004263D7 /* SceneDelegate.swift */; };
 		ECBE6A9B27921CAB004263D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECBE6A9A27921CAB004263D7 /* Assets.xcassets */; };
 		ECBE6A9E27921CAB004263D7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECBE6A9C27921CAB004263D7 /* LaunchScreen.storyboard */; };
+		ECC974CB279F191C002E81DE /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC974CA279F191C002E81DE /* Spot.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,12 +49,15 @@
 		EC7497702794D411002F43AC /* PieceParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceParser.swift; sourceTree = "<group>"; };
 		EC8ACDF9279A670A00A7D854 /* AppWindowComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWindowComposer.swift; sourceTree = "<group>"; };
 		EC8ACDFB279A6A3C00A7D854 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		ECA77EE527A6182000EB78C9 /* ClassMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassMapper.swift; sourceTree = "<group>"; };
+		ECA77EE827A619F200EB78C9 /* King.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = King.swift; sourceTree = "<group>"; };
 		ECBE6A8E27921CA8004263D7 /* Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECBE6A9127921CA8004263D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECBE6A9327921CA8004263D7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		ECBE6A9A27921CAB004263D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECBE6A9D27921CAB004263D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ECBE6A9F27921CAB004263D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ECC974CA279F191C002E81DE /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				EC7497702794D411002F43AC /* PieceParser.swift */,
+				ECA77EE527A6182000EB78C9 /* ClassMapper.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -118,12 +125,14 @@
 		EC7497602794B7F0002F43AC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ECA77EE727A619E100EB78C9 /* PIeces */,
 				EC7497612794B803002F43AC /* Piece.swift */,
 				EC7497632794B80D002F43AC /* PieceType.swift */,
 				EC7497652794B814002F43AC /* PieceColor.swift */,
 				EC214551279C6D7A001E7D11 /* Move.swift */,
 				EC214555279C6F0B001E7D11 /* SpotState.swift */,
 				EC21455B279C7DA2001E7D11 /* Player.swift */,
+				ECC974CA279F191C002E81DE /* Spot.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -134,6 +143,14 @@
 				EC74976D2794CE39002F43AC /* Array+subscript.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		ECA77EE727A619E100EB78C9 /* PIeces */ = {
+			isa = PBXGroup;
+			children = (
+				ECA77EE827A619F200EB78C9 /* King.swift */,
+			);
+			path = PIeces;
 			sourceTree = "<group>";
 		};
 		ECBE6A8527921CA8004263D7 = {
@@ -245,6 +262,7 @@
 				EC7497662794B814002F43AC /* PieceColor.swift in Sources */,
 				EC7497712794D411002F43AC /* PieceParser.swift in Sources */,
 				EC7497682794C024002F43AC /* GenericViewController.swift in Sources */,
+				ECC974CB279F191C002E81DE /* Spot.swift in Sources */,
 				EC74976E2794CE39002F43AC /* Array+subscript.swift in Sources */,
 				EC8ACDFC279A6A3C00A7D854 /* GameView.swift in Sources */,
 				EC214552279C6D7A001E7D11 /* Move.swift in Sources */,
@@ -253,6 +271,8 @@
 				EC21454D279C6ABF001E7D11 /* SquareSpotButton.swift in Sources */,
 				EC21455C279C7DA2001E7D11 /* Player.swift in Sources */,
 				EC74976A2794C136002F43AC /* GameComposer.swift in Sources */,
+				ECA77EE627A6182000EB78C9 /* ClassMapper.swift in Sources */,
+				ECA77EE927A619F200EB78C9 /* King.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

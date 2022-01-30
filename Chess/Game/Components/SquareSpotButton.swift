@@ -26,10 +26,23 @@ final class SpotButton: UIButton {
         self.position = position
         super.init(frame: .zero)
         setBackgroundColor(for: position)
+        setTitleColor(.red, for: .normal)
     }
 
     required init?(coder: NSCoder) {
         fatalError("Init of element not available through coder (you can't use .Xibs / .Storyboards, only init it programmatically)")
+    }
+
+    func setAsOrigin() {
+        spotState = .origin
+    }
+
+    func setAsDestination() {
+        spotState = .destination
+    }
+
+    func cleanState() {
+        spotState = .default
     }
 
     private func setBackgroundColor(for position: Position) {

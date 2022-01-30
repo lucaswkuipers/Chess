@@ -1,10 +1,10 @@
 protocol GameViewProtocol {
     func prepareLayout()
-    func setBoard(to board: [[Piece]])
+    func setBoard(to board: [[Spot]])
 }
 
 protocol GameBrainProtocol {
-    func getStartingPieces() -> [[Piece]]
+    func getStartingBoard() -> [[Spot]]
     func didSelect(position: Position)
 }
 
@@ -22,8 +22,8 @@ final class GameAdapter {
     }
 
     func setupBoard() {
-        guard let startingPieces = brain?.getStartingPieces() else { return }
-        view?.setBoard(to: startingPieces)
+        guard let startingBoard = brain?.getStartingBoard() else { return }
+        view?.setBoard(to: startingBoard)
     }
 }
 
@@ -40,5 +40,11 @@ extension GameAdapter: GenericViewControllerDelegate {
 extension GameAdapter: GameViewDelegate {
     func didSelect(position: Position) {
         brain?.didSelect(position: position)
+    }
+}
+
+extension GameAdapter: GameBrainDelegate {
+    func setBoard(to board: [[Spot]]) {
+        view?.setBoard(to: board)
     }
 }

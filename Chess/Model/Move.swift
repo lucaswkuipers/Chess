@@ -3,7 +3,7 @@ struct Move {
     let destination: Position
 }
 
-struct Position {
+struct Position: Equatable {
     let row: Int
     let column: Int
 }

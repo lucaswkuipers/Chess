@@ -12,6 +12,7 @@ struct GameComposer {
 
         view.delegate = adapter
         viewController.delegate = adapter
+        brain.delegate = adapter
 
         return viewController
     }

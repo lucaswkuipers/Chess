@@ -6,7 +6,7 @@ protocol GameViewDelegate: AnyObject {
 
 final class GameView: UIView {
     weak var delegate: GameViewDelegate?
-    private var board: [[Piece]] = []
+    private var board: [[Spot]] = []
 
     private let boardView: UIView = {
         let view = UIView()
@@ -34,11 +34,6 @@ final class GameView: UIView {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-    }
-
-    func setBoard(to board: [[Piece]]) {
-        self.board = board
-        renderPieces(from: board)
     }
 
     @objc func didTapBoardSpot(_ sender: SpotButton) {
@@ -76,13 +71,14 @@ final class GameView: UIView {
         }
     }
 
-    private func renderPieces(from board: [[Piece]]) {
+    private func renderPieces() {
         for (rowNumber, row) in rowStackView.arrangedSubviews.enumerated() {
-            guard let columnStackView = row as? UIStackView else { return }
-            for (columnNumber, column) in columnStackView.arrangedSubviews.enumerated() {
-                guard let button = column as? SpotButton else { return }
-                guard let piece = board[safeIndex: rowNumber]?[safeIndex: columnNumber] else { continue }
-                button.piece = piece
+            guard let spotStackView = row as? UIStackView else { return }
+            for (columnNumber, column) in spotStackView.arrangedSubviews.enumerated() {
+                guard let button = column as? SpotButton,
+                      let spot = board[safeIndex: rowNumber]?[safeIndex: columnNumber] else { continue }
+                button.piece = spot.piece
+                button.spotState = spot.spotState
             }
         }
     }
@@ -107,6 +103,11 @@ final class GameView: UIView {
 }
 
 extension GameView: GameViewProtocol {
+    func setBoard(to board: [[Spot]]) {
+        self.board = board
+        renderPieces()
+    }
+
     func prepareLayout() {
         setupViewConstraints()
     }
