@@ -14,6 +14,7 @@ final class GameBrain: GameBrainProtocol {
     }
     private var origin: Position?
     private var destination: Position?
+    private var validMoves: [Position] = []
 
     func getStartingBoard() -> [[Spot]] {
         return startingBoard
@@ -36,7 +37,10 @@ final class GameBrain: GameBrainProtocol {
                 setValidMoves(with: position)
                 return
             }
-            applyChanges(with: position)
+
+            if validMoves.contains(position) {
+                applyChanges(with: position)
+            }
         }
     }
 
@@ -45,8 +49,8 @@ final class GameBrain: GameBrainProtocol {
     }
 
     private func setValidMoves(with position: Position) {
+        validMoves = []
         guard let originPiece = getPiece(from: origin) else { return }
-        var validMoves: [Position] = []
         switch originPiece.type {
         case .king:
             validMoves = getValidKingMoves(from: position)
@@ -62,11 +66,11 @@ final class GameBrain: GameBrainProtocol {
             validMoves = getValidPawnMoves(from: position)
         }
 
-        setValidMovesState(for: validMoves)
+        setValidMovesState()
     }
 
-    private func setValidMovesState(for moves: [Position]) {
-        for move in moves {
+    private func setValidMovesState() {
+        for move in validMoves {
             if getPiece(from: move) == nil {
                 setState(.valid, to: move)
             } else {
