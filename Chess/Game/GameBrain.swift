@@ -511,6 +511,34 @@ final class GameBrain: GameBrainProtocol {
             if getPiece(from: rightCaptureMove)?.color == .black {
                 validMoves.append(rightCaptureMove)
             }
+        } else if color == .black {
+            // Initial two moves
+            if position.row == 1 {
+                let move = Position(row: 3, column: position.column)
+                if getPiece(from: move)?.color != color {
+                    let previousPosition = Position(row: 2, column: position.column)
+                    if getPiece(from: previousPosition) == nil {
+                        validMoves.append(move) // two moves down
+                    }
+                }
+            }
+
+            // Normal front
+            let move = Position(row: position.row + 1, column: position.column)
+            if getPiece(from: move) == nil {
+                validMoves.append(move)
+            }
+
+            // Capture (diagonals)
+            let leftCaptureMove = Position(row: position.row + 1, column: position.column - 1)
+            if getPiece(from: leftCaptureMove)?.color == .white {
+                validMoves.append(leftCaptureMove)
+            }
+
+            let rightCaptureMove = Position(row: position.row + 1, column: position.column + 1)
+            if getPiece(from: rightCaptureMove)?.color == .white {
+                validMoves.append(rightCaptureMove)
+            }
         }
         return validMoves
     }
