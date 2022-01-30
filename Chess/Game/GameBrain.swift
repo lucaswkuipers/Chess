@@ -10,7 +10,6 @@ final class GameBrain: GameBrainProtocol {
     private var playerTurn: Player = .bottom
     private var startingPlayer: Player = .bottom
     private var origin: Position?
-    private var destination: Position?
     private var validMoves: [Position] = []
     private var startingBoard = PieceParser.getBoard(from: BoardInitialLayoutVariant.standard.pieces)
     private var board =  PieceParser.getBoard(from: BoardInitialLayoutVariant.standard.pieces)
@@ -97,12 +96,10 @@ final class GameBrain: GameBrainProtocol {
 
     private func applyChanges(with position: Position) {
         resetStates()
-        destination = position
-        setPiece(getPiece(from: origin), to: destination)
+        setPiece(getPiece(from: origin), to: position)
         cleanPiece(from: origin)
         resetStates()
         origin = nil
-        destination = nil
         printBoard() // log purposes (visualize what should be happening)
         playerTurn = playerTurn == .bottom ? .top : .bottom
         delegate?.setBoard(to: board)
