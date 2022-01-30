@@ -15,61 +15,65 @@ final class GameBrain: GameBrainProtocol {
 
     func didSelect(position: Position) {
         if origin == nil {
-            // First selection: Origin
-            if getPiece(from: position) == nil { return }
+            if isSpotSelectedEmpty(on: position) { return }
             origin = position
-
-            // Pawn
-            let originPiece = getPiece(from: origin)
-            if originPiece?.type == .pawn {
-                let validMoves = getValidPawnMoves(from: position)
-
-                for validMove in validMoves {
-                    print("set valid for ROW: \(validMove.row), COL: \(validMove.column)")
-                    setState(.valid, to: validMove)
-                }
-            }
+            setValidMoves(with: position)
+            setState(.origin, to: position)
         } else {
-            // Second selection: Destination
-
-            // Validation
+            if position == origin { return }
             let destinationPiece = getPiece(from: position)
             let originPiece = getPiece(from: origin)
 
             if destinationPiece?.color == originPiece?.color {
                 origin = position
                 resetStates()
-
-                // Pawn
-                let originPiece = getPiece(from: origin)
-                if originPiece?.type == .pawn {
-                    let validMoves = getValidPawnMoves(from: position)
-
-                    for validMove in validMoves {
-                        print("set valid for ROW: \(validMove.row), COL: \(validMove.column)")
-                        setState(.valid, to: validMove)
-                    }
+                setValidMoves(with: position)
                 return
+            }
+            applyChanges(with: position)
+        }
+    }
+
+    private func isSpotSelectedEmpty(on position: Position) -> Bool {
+        return getPiece(from: position) == nil
+    }
+
+    private func setValidMoves(with position: Position) {
+        // Pawn
+        let originPiece = getPiece(from: origin)
+        if originPiece?.type == .pawn {
+            let validMoves = getValidPawnMoves(from: position)
+
+            for validMove in validMoves {
+                print("set valid for ROW: \(validMove.row), COL: \(validMove.column)")
+                if getPiece(from: validMove) == nil {
+                    setState(.valid, to: validMove)
+                } else {
+                    setState(.capture, to: validMove)
                 }
             }
-
-            // Apply changes
-            resetStates()
-            destination = position
-            setPiece(getPiece(from: origin), to: destination)
-            cleanPiece(from: origin)
-            resetStates()
-            origin = nil
-            destination = nil
-            printBoard() // log purposes (visualize what should be happening)
+        return
         }
+
+    }
+
+    private func applyChanges(with position: Position) {
+        resetStates()
+        destination = position
+        setPiece(getPiece(from: origin), to: destination)
+        cleanPiece(from: origin)
+        resetStates()
+        origin = nil
+        destination = nil
+        printBoard() // log purposes (visualize what should be happening)
     }
 
     private func setPiece(_ piece: Piece?, to position: Position?) {
         guard let position = position else { return }
 
         if position.row >= board.count { return }
-        if position.column >= board[position.row].count { return }
+        guard let row = board[safeIndex: position.row] else { return }
+        if position.column >= row.count { return }
 
         board[position.row][position.column].piece = piece
         delegate?.setBoard(to: board)
@@ -79,7 +83,8 @@ final class GameBrain: GameBrainProtocol {
         guard let position = position else { return }
 
         if position.row >= board.count { return }
-        if position.column >= board[position.row].count { return }
+        guard let row = board[safeIndex: position.row] else { return }
+        if position.row >= row.count { return }
 
         board[position.row][position.column].spotState = state
         delegate?.setBoard(to: board)

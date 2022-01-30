@@ -2,7 +2,7 @@ import UIKit
 
 enum SpotState {
     case origin
-    case destination
+    case capture
     case valid
     case `default`
 
@@ -10,8 +10,8 @@ enum SpotState {
         switch self {
         case .origin:
             return .systemBlue
-        case .destination:
-            return .systemYellow
+        case .capture:
+            return .systemRed
         case .valid:
             return .systemGreen
         case .default:
