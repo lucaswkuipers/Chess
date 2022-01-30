@@ -55,13 +55,13 @@ final class GameView: UIView {
         NSLayoutConstraint.activate([
             boardView.centerYAnchor.constraint(equalTo: centerYAnchor),
             boardView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            boardView.heightAnchor.constraint(equalToConstant: smallestDimension - 40),
-            boardView.widthAnchor.constraint(equalToConstant: smallestDimension - 40),
+            boardView.heightAnchor.constraint(equalToConstant: smallestDimension - 15),
+            boardView.widthAnchor.constraint(equalToConstant: smallestDimension - 15),
 
-            rowStackView.topAnchor.constraint(equalTo: boardView.topAnchor, constant: 20),
-            rowStackView.leftAnchor.constraint(equalTo: boardView.leftAnchor, constant: 20),
-            rowStackView.bottomAnchor.constraint(equalTo: boardView.bottomAnchor, constant: -20),
-            rowStackView.rightAnchor.constraint(equalTo: boardView.rightAnchor, constant: -20)
+            rowStackView.topAnchor.constraint(equalTo: boardView.topAnchor, constant: 15),
+            rowStackView.leftAnchor.constraint(equalTo: boardView.leftAnchor, constant: 15),
+            rowStackView.bottomAnchor.constraint(equalTo: boardView.bottomAnchor, constant: -15),
+            rowStackView.rightAnchor.constraint(equalTo: boardView.rightAnchor, constant: -15)
         ])
     }
 
