@@ -5,4 +5,8 @@ struct Piece {
     var imageName: String {
         color.name + "_" + type.name
     }
+
+    var abbreviation: String {
+        color.name.first!.uppercased() + "_" + type.name.first!.uppercased()
+    }
 }

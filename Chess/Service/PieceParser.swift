@@ -5,16 +5,24 @@ struct PieceParser {
             var spotRow: [Spot] = []
             for stringPiece in row {
                 let separatedString = stringPiece.split(separator: "_").map(String.init)
-                guard let pieceColorRawValue = separatedString.first,
-                      let pieceTypeRawValue = separatedString.last,
-                      let pieceColor = PieceColor(rawValue: pieceColorRawValue),
-                      let pieceType = PieceType(rawValue: pieceTypeRawValue) else { continue }
-                let piece = Piece(type: pieceType, color: pieceColor)
+                let pieceColorRawValue = separatedString.first ?? ""
+                let pieceTypeRawValue = separatedString.last ?? ""
+                let pieceColor = PieceColor(rawValue: pieceColorRawValue)
+                let pieceType = PieceType(rawValue: pieceTypeRawValue)
+                let piece = makePiece(type: pieceType, color: pieceColor)
                 let spot = Spot(spotState: .default, piece: piece)
                 spotRow.append(spot)
+                print(spotRow)
             }
             board.append(spotRow)
         }
         return board
+    }
+
+    private static func makePiece(type: PieceType?, color: PieceColor?) -> Piece? {
+        guard let type = type,
+              let color = color else { return nil }
+
+        return Piece(type: type, color: color)
     }
 }

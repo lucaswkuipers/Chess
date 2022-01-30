@@ -17,8 +17,7 @@ final class SpotButton: UIButton {
 
     var piece: Piece? {
         didSet {
-            guard let piece = piece else { return }
-            setImage(UIImage(named: piece.imageName), for: .normal)
+            setImage(UIImage(named: piece?.imageName ?? ""), for: .normal)
         }
     }
 
