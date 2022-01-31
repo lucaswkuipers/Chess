@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "black_pawn.png",
+      "filename" : "black_pawn@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "black_pawn@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "black_pawn@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -16,6 +16,9 @@
 		EC2F343527A7438300ED1992 /* UIColor+appliedOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2F343427A7438300ED1992 /* UIColor+appliedOverlay.swift */; };
 		EC2F343727A745A700ED1992 /* String+subscript(bounds).swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2F343627A745A700ED1992 /* String+subscript(bounds).swift */; };
 		EC47FE7B27A8453600CB0890 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC47FE7A27A8453600CB0890 /* HapticsManager.swift */; };
+		EC47FE7E27A84D3400CB0890 /* begin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EC47FE7D27A84D3400CB0890 /* begin.mp3 */; };
+		EC47FE8027A84D3C00CB0890 /* move.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EC47FE7F27A84D3C00CB0890 /* move.mp3 */; };
+		EC47FE8227A84D4900CB0890 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC47FE8127A84D4900CB0890 /* SoundManager.swift */; };
 		EC7497622794B803002F43AC /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497612794B803002F43AC /* Piece.swift */; };
 		EC7497642794B80D002F43AC /* PieceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497632794B80D002F43AC /* PieceType.swift */; };
 		EC7497662794B814002F43AC /* PieceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497652794B814002F43AC /* PieceColor.swift */; };
@@ -45,6 +48,9 @@
 		EC2F343427A7438300ED1992 /* UIColor+appliedOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+appliedOverlay.swift"; sourceTree = "<group>"; };
 		EC2F343627A745A700ED1992 /* String+subscript(bounds).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+subscript(bounds).swift"; sourceTree = "<group>"; };
 		EC47FE7A27A8453600CB0890 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
+		EC47FE7D27A84D3400CB0890 /* begin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = begin.mp3; sourceTree = "<group>"; };
+		EC47FE7F27A84D3C00CB0890 /* move.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = move.mp3; sourceTree = "<group>"; };
+		EC47FE8127A84D4900CB0890 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		EC7497612794B803002F43AC /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
 		EC7497632794B80D002F43AC /* PieceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceType.swift; sourceTree = "<group>"; };
 		EC7497652794B814002F43AC /* PieceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceColor.swift; sourceTree = "<group>"; };
@@ -106,8 +112,18 @@
 			isa = PBXGroup;
 			children = (
 				EC47FE7A27A8453600CB0890 /* HapticsManager.swift */,
+				EC47FE8127A84D4900CB0890 /* SoundManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		EC47FE7C27A84D1300CB0890 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				EC47FE7D27A84D3400CB0890 /* begin.mp3 */,
+				EC47FE7F27A84D3C00CB0890 /* move.mp3 */,
+			);
+			path = Sound;
 			sourceTree = "<group>";
 		};
 		EC74975D2794B141002F43AC /* Game */ = {
@@ -189,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				EC74975E2794B149002F43AC /* Application */,
+				EC47FE7C27A84D1300CB0890 /* Sound */,
 				EC74976F2794CE57002F43AC /* Helper */,
 				EC47FE7927A8451E00CB0890 /* Manager */,
 				EC214557279C74C7001E7D11 /* Data */,
@@ -257,6 +274,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC47FE7E27A84D3400CB0890 /* begin.mp3 in Resources */,
+				EC47FE8027A84D3C00CB0890 /* move.mp3 in Resources */,
 				ECBE6A9E27921CAB004263D7 /* LaunchScreen.storyboard in Resources */,
 				ECBE6A9B27921CAB004263D7 /* Assets.xcassets in Resources */,
 			);
@@ -283,6 +302,7 @@
 				ECC974CB279F191C002E81DE /* Spot.swift in Sources */,
 				EC2F343527A7438300ED1992 /* UIColor+appliedOverlay.swift in Sources */,
 				EC74976E2794CE39002F43AC /* Array+subscript.swift in Sources */,
+				EC47FE8227A84D4900CB0890 /* SoundManager.swift in Sources */,
 				EC8ACDFC279A6A3C00A7D854 /* GameView.swift in Sources */,
 				EC214552279C6D7A001E7D11 /* Move.swift in Sources */,
 				ECBE6A9427921CA8004263D7 /* SceneDelegate.swift in Sources */,

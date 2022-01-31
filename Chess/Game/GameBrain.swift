@@ -125,6 +125,8 @@ final class GameBrain: GameBrainProtocol {
     }
 
     private func applyChanges(with position: Position) {
+        HapticsManager.shared.impactVibration(style: .heavy, at: 1)
+        SoundManager.shared.play(sound: .move)
         resetStates()
         setPiece(getPiece(from: origin), to: position)
         cleanPiece(from: origin)
@@ -133,7 +135,6 @@ final class GameBrain: GameBrainProtocol {
         printBoard() // log purposes (visualize what should be happening)
         currentPlayer = currentPlayer == .bottom ? .top : .bottom
         delegate?.setBoard(to: board)
-        HapticsManager.shared.impactVibration(style: .heavy, at: 1)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.delegate?.rotateBoard()
          }

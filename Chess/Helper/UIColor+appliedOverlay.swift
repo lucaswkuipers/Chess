@@ -1,12 +1,5 @@
 import UIKit
 
-//func appliedOverlay(coverColor: UIColor, alpha: CGFloat = 1.0) -> UIColor {
-//    return blendProcedure(coverColor: coverColor, alpha: alpha) {
-//        if $0 <= 0.5 { return 2 * $1 * $0 }
-//        else { return 1 - 2 * (1 - $1) * (1 - $0) }
-//    }
-//}
-
 extension UIColor {
     func appliedOverlay(_ alpha: CGFloat, for color: UIColor?) -> UIColor? {
         guard let color = color else { return nil }

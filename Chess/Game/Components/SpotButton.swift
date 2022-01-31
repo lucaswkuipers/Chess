@@ -11,7 +11,7 @@ final class SpotButton: UIButton {
 
     var spotState: SpotState = .default {
         didSet {
-            backgroundColor = defaultColor?.appliedOverlay(0.5, for: spotState.color) ?? defaultColor
+            backgroundColor = defaultColor?.appliedOverlay(0.8, for: spotState.color) ?? defaultColor
         }
     }
 
