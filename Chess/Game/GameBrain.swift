@@ -53,11 +53,7 @@ final class GameBrain: GameBrainProtocol {
         let originPiece = getPiece(from: origin)
 
         if destinationPiece?.color == originPiece?.color {
-            origin = position
-            resetStates()
-            setState(.origin, to: position)
-            setValidMoves(with: position)
-            return
+            selectOrigin(on: position)
         }
     }
 
@@ -65,8 +61,10 @@ final class GameBrain: GameBrainProtocol {
         if isSpotSelectedEmpty(on: position) { return }
         if getPiece(from: position)?.color == currentPlayerColor {
             origin = position
+            resetStates()
             setValidMoves(with: position)
             setState(.origin, to: position)
+            HapticsManager.shared.impactVibration(style: .soft, at: 1)
         }
     }
 
@@ -135,6 +133,7 @@ final class GameBrain: GameBrainProtocol {
         printBoard() // log purposes (visualize what should be happening)
         currentPlayer = currentPlayer == .bottom ? .top : .bottom
         delegate?.setBoard(to: board)
+        HapticsManager.shared.impactVibration(style: .heavy, at: 1)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.delegate?.rotateBoard()
          }
