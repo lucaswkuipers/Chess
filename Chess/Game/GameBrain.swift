@@ -183,16 +183,28 @@ final class GameBrain: GameBrainProtocol {
         }
     }
 
-    private func isKingInCheck(for color: PieceColor) -> Bool {
+    private func getAttackedPositions(for color: PieceColor) -> [Position] {
         var attackedPositions: [Position] = []
         for (rowNumber, row) in board.enumerated() {
             for (columnNumber, spot) in row.enumerated() {
-                if spot.piece?.color != color {
-                    let validMoves = getValidMoves(for: Position(row: rowNumber, column: columnNumber))
-                    attackedPositions.append(contentsOf: validMoves)
+                if color == .black {
+                    if spot.piece?.color == .white {
+                        let validMoves = getCaptureMoves(for: Position(row: rowNumber, column: columnNumber))
+                        attackedPositions.append(contentsOf: validMoves)
+                    }
+                } else if color == .white {
+                    if spot.piece?.color == .black {
+                        let validMoves = getCaptureMoves(for: Position(row: rowNumber, column: columnNumber))
+                        attackedPositions.append(contentsOf: validMoves)
+                    }
                 }
             }
         }
+        return attackedPositions
+    }
+
+    private func isKingInCheck(for color: PieceColor) -> Bool {
+        let attackedPositions = getAttackedPositions(for: color)
         guard let kingPosition = getKingPosition(for: color) else { return false }
         return attackedPositions.contains(kingPosition)
     }
@@ -211,8 +223,13 @@ final class GameBrain: GameBrainProtocol {
     // MARK: - Pieces
 
     private func getValidKingMoves(from position: Position) -> [Position] {
-        let color = getPiece(from: position)?.color
+        guard let color = getPiece(from: position)?.color else { return [] }
         var validMoves: [Position] = []
+        var attackedPositions: [Position] = []
+
+        if currentPlayerColor == color {
+            attackedPositions = getAttackedPositions(for: color)
+        }
 
         // Front
         let frontMove = Position(row: position.row - 1, column: position.column)
@@ -254,6 +271,7 @@ final class GameBrain: GameBrainProtocol {
         if getPiece(from: lowerRightMove)?.color != color {
             validMoves.append(lowerRightMove)
         }
+        validMoves = validMoves.filter { !attackedPositions.contains($0) }
         return validMoves
     }
 
@@ -424,7 +442,7 @@ final class GameBrain: GameBrainProtocol {
     }
 
     private func getValidBishopMoves(from position: Position) -> [Position] {
-        let color = getPiece(from: position)?.color
+            let color = getPiece(from: position)?.color
         var validMoves: [Position] = []
 
         // Up left
@@ -555,6 +573,47 @@ final class GameBrain: GameBrainProtocol {
 
     private func isMoveInBounds(on position: Position) -> Bool {
         return position.row < numberOfRows && position.row >= 0 && position.column < numberOfColumns && position.column >= 0
+    }
+
+    private func getCaptureMoves(for position: Position) -> [Position] {
+        guard let piece = getPiece(from: position) else { return [] }
+        var captureMoves: [Position] = []
+
+        switch piece.type {
+        case .king:
+            captureMoves = getValidKingMoves(from: position)
+        case .queen:
+            captureMoves = getValidQueenMoves(from: position)
+        case .rook:
+            captureMoves = getValidRookMoves(from: position)
+        case .bishop:
+            captureMoves = getValidBishopMoves(from: position)
+        case .knight:
+            captureMoves = getValidKnightMoves(from: position)
+        case .pawn:
+            captureMoves = getPawnCaptureMoves(from: position)
+        }
+        return captureMoves
+    }
+
+    private func getPawnCaptureMoves(from position: Position) -> [Position] {
+        let color = getPiece(from: position)?.color
+        var validMoves: [Position] = []
+
+        if color == .white {
+            let leftCaptureMove = Position(row: position.row - 1, column: position.column - 1)
+            validMoves.append(leftCaptureMove)
+
+            let rightCaptureMove = Position(row: position.row - 1, column: position.column + 1)
+            validMoves.append(rightCaptureMove)
+        } else if color == .black {
+            let leftCaptureMove = Position(row: position.row + 1, column: position.column - 1)
+            validMoves.append(leftCaptureMove)
+
+            let rightCaptureMove = Position(row: position.row + 1, column: position.column + 1)
+            validMoves.append(rightCaptureMove)
+        }
+        return validMoves
     }
 
     private func getValidPawnMoves(from position: Position) -> [Position] {
