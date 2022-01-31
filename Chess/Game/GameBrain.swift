@@ -151,6 +151,19 @@ final class GameBrain: GameBrainProtocol {
         delegate?.setBoard(to: board)
     }
 
+    private func getBoardWithPiece(piece: Piece?, on position: Position?, board: [[Spot]]) -> [[Spot]] {
+        guard let position = position else { return board }
+        var modifiedBoard = board
+
+        if position.row >= board.count { return modifiedBoard }
+        guard let row = board[safeIndex: position.row] else { return modifiedBoard }
+        if position.column >= row.count { return modifiedBoard }
+
+        modifiedBoard[position.row][position.column].piece = piece
+        return modifiedBoard
+    }
+
+
     private func setState(_ state: SpotState, to position: Position?) {
         guard let position = position else { return }
 
@@ -575,6 +588,61 @@ final class GameBrain: GameBrainProtocol {
         return position.row < numberOfRows && position.row >= 0 && position.column < numberOfColumns && position.column >= 0
     }
 
+    private func willMoveEndangerKing(move: Move, of color: PieceColor) -> Bool {
+        let modifiedBoard = getBoardWithAppliedMove(move: move, on: board)
+        return isKingInDanger(of: color, on: modifiedBoard)
+    }
+
+    private func isKingInDanger(of color: PieceColor, on board: [[Spot]]) -> Bool {
+        let attackedPositions = getAttackedPositions(for: color, on: board)
+        guard let kingPosition = getKingPosition(for: color, on: board) else { return false }
+        return attackedPositions.contains(kingPosition)
+    }
+
+    private func getKingPosition(for color: PieceColor, on board: [[Spot]]) -> Position? {
+        for (rowNumber, row) in board.enumerated() {
+            for (columnNumber, spot) in row.enumerated() {
+                if spot.piece?.type == .king && spot.piece?.color == color {
+                    return Position(row: rowNumber, column: columnNumber)
+                }
+            }
+        }
+        return nil
+    }
+
+    private func getAttackedPositions(for color: PieceColor, on board: [[Spot]]) -> [Position] {
+        var attackedPositions: [Position] = []
+        for (rowNumber, row) in board.enumerated() {
+            for (columnNumber, spot) in row.enumerated() {
+                if color == .black {
+                    if spot.piece?.color == .white {
+                        let validMoves = getCaptureMoves(for: Position(row: rowNumber, column: columnNumber))
+                        attackedPositions.append(contentsOf: validMoves)
+                    }
+                } else if color == .white {
+                    if spot.piece?.color == .black {
+                        let validMoves = getCaptureMoves(for: Position(row: rowNumber, column: columnNumber))
+                        attackedPositions.append(contentsOf: validMoves)
+                    }
+                }
+            }
+        }
+        return attackedPositions
+
+    }
+
+    private func getBoardWithAppliedMove(move: Move, on board: [[Spot]]) -> [[Spot]] {
+        let origin = move.origin
+        let destination = move.destination
+
+        let piece = getPiece(from: origin)
+
+        var modifiedBoard = getBoardWithPiece(piece: piece, on: destination, board: board)
+        modifiedBoard = getBoardWithPiece(piece: nil, on: origin, board: modifiedBoard)
+
+        return modifiedBoard
+    }
+
     private func getCaptureMoves(for position: Position) -> [Position] {
         guard let piece = getPiece(from: position) else { return [] }
         var captureMoves: [Position] = []
@@ -597,7 +665,7 @@ final class GameBrain: GameBrainProtocol {
     }
 
     private func getPawnCaptureMoves(from position: Position) -> [Position] {
-        let color = getPiece(from: position)?.color
+        guard let color = getPiece(from: position)?.color else { return [] }
         var validMoves: [Position] = []
 
         if color == .white {
@@ -617,7 +685,7 @@ final class GameBrain: GameBrainProtocol {
     }
 
     private func getValidPawnMoves(from position: Position) -> [Position] {
-        let color = getPiece(from: position)?.color
+        guard let color = getPiece(from: position)?.color else { return [] }
         var validMoves: [Position] = []
 
         // White
@@ -678,6 +746,7 @@ final class GameBrain: GameBrainProtocol {
                 validMoves.append(rightCaptureMove)
             }
         }
+        validMoves = validMoves.filter { !willMoveEndangerKing(move: Move(origin: position, destination: $0), of: color)}
         return validMoves
     }
 
