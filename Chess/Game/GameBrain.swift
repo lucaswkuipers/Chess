@@ -7,7 +7,7 @@ protocol GameBrainDelegate {
 
 final class GameBrain: GameBrainProtocol {
     var delegate: GameBrainDelegate?
-    private var playerTurn: Player = .bottom
+    private var currentPlayer: Player = .bottom
     private var startingPlayer: Player = .bottom
     private var origin: Position?
     private var validMoves: [Position] = []
@@ -20,8 +20,8 @@ final class GameBrain: GameBrainProtocol {
         board.first?.count ?? 0
     }
 
-    private var playerTurnColor: PieceColor {
-        return playerTurn == startingPlayer ? .white : .black
+    private var currentPlayerColor: PieceColor {
+        return currentPlayer == startingPlayer ? .white : .black
     }
 
     func getStartingBoard() -> [[Spot]] {
@@ -34,33 +34,65 @@ final class GameBrain: GameBrainProtocol {
 
     func didSelect(position: Position) {
         if origin == nil {
-            if isSpotSelectedEmpty(on: position) { return }
-            if getPiece(from: position)?.color == playerTurnColor {
-                origin = position
-                setValidMoves(with: position)
-                setState(.origin, to: position)
-            }
+            selectOrigin(on: position)
         } else {
-            if position == origin { return }
-            let destinationPiece = getPiece(from: position)
-            let originPiece = getPiece(from: origin)
+            selectDestination(on: position)
+            makeMoveIfValid(on: position)
+        }
+    }
 
-            if destinationPiece?.color == originPiece?.color {
-                origin = position
-                resetStates()
-                setState(.origin, to: position)
-                setValidMoves(with: position)
-                return
-            }
+    private func makeMoveIfValid(on position: Position) {
+        if validMoves.contains(position) {
+            applyChanges(with: position)
+        }
+    }
 
-            if validMoves.contains(position) {
-                applyChanges(with: position)
-            }
+    private func selectDestination(on position: Position) {
+        if position == origin { return }
+        let destinationPiece = getPiece(from: position)
+        let originPiece = getPiece(from: origin)
+
+        if destinationPiece?.color == originPiece?.color {
+            origin = position
+            resetStates()
+            setState(.origin, to: position)
+            setValidMoves(with: position)
+            return
+        }
+    }
+
+    private func selectOrigin(on position: Position) {
+        if isSpotSelectedEmpty(on: position) { return }
+        if getPiece(from: position)?.color == currentPlayerColor {
+            origin = position
+            setValidMoves(with: position)
+            setState(.origin, to: position)
         }
     }
 
     private func isSpotSelectedEmpty(on position: Position) -> Bool {
         return getPiece(from: position) == nil
+    }
+
+    private func getValidMoves(for position: Position) -> [Position] {
+        guard let piece = getPiece(from: position) else { return [] }
+        var validMoves: [Position] = []
+
+        switch piece.type {
+        case .king:
+            validMoves = getValidKingMoves(from: position)
+        case .queen:
+            validMoves = getValidQueenMoves(from: position)
+        case .rook:
+            validMoves = getValidRookMoves(from: position)
+        case .bishop:
+            validMoves = getValidBishopMoves(from: position)
+        case .knight:
+            validMoves = getValidKnightMoves(from: position)
+        case .pawn:
+            validMoves = getValidPawnMoves(from: position)
+        }
+        return validMoves
     }
 
     private func setValidMoves(with position: Position) {
@@ -101,7 +133,7 @@ final class GameBrain: GameBrainProtocol {
         resetStates()
         origin = nil
         printBoard() // log purposes (visualize what should be happening)
-        playerTurn = playerTurn == .bottom ? .top : .bottom
+        currentPlayer = currentPlayer == .bottom ? .top : .bottom
         delegate?.setBoard(to: board)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.delegate?.rotateBoard()
@@ -149,6 +181,31 @@ final class GameBrain: GameBrainProtocol {
             }
             print(line)
         }
+    }
+
+    private func isKingInCheck(for color: PieceColor) -> Bool {
+        var attackedPositions: [Position] = []
+        for (rowNumber, row) in board.enumerated() {
+            for (columnNumber, spot) in row.enumerated() {
+                if spot.piece?.color != color {
+                    let validMoves = getValidMoves(for: Position(row: rowNumber, column: columnNumber))
+                    attackedPositions.append(contentsOf: validMoves)
+                }
+            }
+        }
+        guard let kingPosition = getKingPosition(for: color) else { return false }
+        return attackedPositions.contains(kingPosition)
+    }
+
+    private func getKingPosition(for color: PieceColor) -> Position? {
+        for (rowNumber, row) in board.enumerated() {
+            for (columnNumber, spot) in row.enumerated() {
+                if spot.piece?.type == .king && spot.piece?.color == color {
+                    return Position(row: rowNumber, column: columnNumber)
+                }
+            }
+        }
+        return nil
     }
 
     // MARK: - Pieces
