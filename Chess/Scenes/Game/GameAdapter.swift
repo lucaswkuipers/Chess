@@ -52,7 +52,6 @@ extension GameAdapter: GenericViewControllerDelegate {
 extension GameAdapter: GameViewDelegate {
     func didTapSettingsButton() {
         viewController?.navigationController?.pushViewController(SettingsComposer.makeScene(), animated: true)
-        print("DID tap stuff")
     }
 
     func didSelect(position: Position) {

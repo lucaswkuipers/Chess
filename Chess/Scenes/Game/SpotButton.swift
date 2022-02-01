@@ -35,8 +35,8 @@ final class SpotButton: UIButton {
         fatalError("Init of element not available through coder (you can't use .Xibs / .Storyboards, only init it programmatically)")
     }
 
-    func rotate() {
-        UIView.animate(withDuration: 1, delay: 0, options: [.preferredFramesPerSecond60, .curveEaseInOut], animations: {
+    func rotate(duration: CGFloat) {
+        UIView.animate(withDuration: duration, delay: 0, options: [.preferredFramesPerSecond60, .curveEaseInOut], animations: {
             self.imageView?.transform = self.imageView?.transform.rotated(by: .pi) ?? .identity
         }, completion: nil)
     }

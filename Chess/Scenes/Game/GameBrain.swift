@@ -135,7 +135,7 @@ final class GameBrain: GameBrainProtocol {
 //        printBoard() // log purposes (visualize what should be happening)
         currentPlayer = currentPlayer == .bottom ? .top : .bottom
         delegate?.setBoard(to: board)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.delegate?.rotateBoard()
          }
     }

@@ -47,15 +47,34 @@ final class RotationAnimationSettingView: UIView {
         return _switch
     }()
 
+    private let durationLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Duration in seconds"
+        return label
+    }()
+
+    private let durationSlider: UISlider = {
+        let slider = UISlider()
+        slider.minimumValue = 0
+        slider.maximumValue = 2
+        return slider
+    }()
+
     init() {
         super.init(frame: .zero)
         setupViewStyle()
         setupViewHierarchy()
         setupViewConstraints()
+        setupEvents()
+        setupSwitchState()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+
+    @objc func valueDidChange(_ sender: UISwitch) {
+        PreferencesManager.shared.save(isRotationAnimated: sender.isOn)
     }
 
     private func setupViewStyle() {
@@ -65,6 +84,8 @@ final class RotationAnimationSettingView: UIView {
     private func setupViewHierarchy() {
         addSubview(titleLabel)
         addSubview(animationSwitch)
+        addSubview(durationLabel)
+        addSubview(durationSlider)
     }
 
     private func setupViewConstraints() {
@@ -72,11 +93,28 @@ final class RotationAnimationSettingView: UIView {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
-            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
 
             animationSwitch.leftAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 20),
-            animationSwitch.centerYAnchor.constraint(equalTo: centerYAnchor),
-            animationSwitch.rightAnchor.constraint(equalTo: rightAnchor, constant: -20)
+            animationSwitch.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            animationSwitch.rightAnchor.constraint(equalTo: rightAnchor, constant: -20),
+
+            durationLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            durationLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
+            durationLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -20),
+
+            durationSlider.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            durationSlider.leftAnchor.constraint(equalTo: durationLabel.rightAnchor, constant: 20),
+            durationSlider.rightAnchor.constraint(equalTo: rightAnchor, constant: -100),
+            durationSlider.centerYAnchor.constraint(equalTo: durationLabel.centerYAnchor),
+            durationSlider.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
         ])
+    }
+
+    private func setupEvents() {
+        animationSwitch.addTarget(self, action: #selector(valueDidChange(_:)), for: .valueChanged)
+    }
+
+    private func setupSwitchState() {
+        animationSwitch.isOn = PreferencesManager.shared.isRotationAnimated()
     }
 }

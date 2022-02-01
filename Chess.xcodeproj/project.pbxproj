@@ -19,6 +19,7 @@
 		EC47FE7E27A84D3400CB0890 /* begin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EC47FE7D27A84D3400CB0890 /* begin.mp3 */; };
 		EC47FE8027A84D3C00CB0890 /* move.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EC47FE7F27A84D3C00CB0890 /* move.mp3 */; };
 		EC47FE8227A84D4900CB0890 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC47FE8127A84D4900CB0890 /* SoundManager.swift */; };
+		EC61919827A8ED8B0001172C /* PreferencesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC61919727A8ED8B0001172C /* PreferencesManager.swift */; };
 		EC7497622794B803002F43AC /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497612794B803002F43AC /* Piece.swift */; };
 		EC7497642794B80D002F43AC /* PieceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497632794B80D002F43AC /* PieceType.swift */; };
 		EC7497662794B814002F43AC /* PieceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7497652794B814002F43AC /* PieceColor.swift */; };
@@ -56,6 +57,7 @@
 		EC47FE7D27A84D3400CB0890 /* begin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = begin.mp3; sourceTree = "<group>"; };
 		EC47FE7F27A84D3C00CB0890 /* move.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = move.mp3; sourceTree = "<group>"; };
 		EC47FE8127A84D4900CB0890 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		EC61919727A8ED8B0001172C /* PreferencesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesManager.swift; sourceTree = "<group>"; };
 		EC7497612794B803002F43AC /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
 		EC7497632794B80D002F43AC /* PieceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceType.swift; sourceTree = "<group>"; };
 		EC7497652794B814002F43AC /* PieceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceColor.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			children = (
 				EC47FE7A27A8453600CB0890 /* HapticsManager.swift */,
 				EC47FE8127A84D4900CB0890 /* SoundManager.swift */,
+				EC61919727A8ED8B0001172C /* PreferencesManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				EC74976C2794C161002F43AC /* GameAdapter.swift in Sources */,
 				EC47FE7B27A8453600CB0890 /* HapticsManager.swift in Sources */,
 				EC7497642794B80D002F43AC /* PieceType.swift in Sources */,
+				EC61919827A8ED8B0001172C /* PreferencesManager.swift in Sources */,
 				EC7497662794B814002F43AC /* PieceColor.swift in Sources */,
 				EC7497712794D411002F43AC /* PieceParser.swift in Sources */,
 				ECC8167927A8A4A400A0EDAF /* TableViewDelegateAndDataSource.swift in Sources */,

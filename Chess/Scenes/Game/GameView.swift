@@ -130,11 +130,12 @@ final class GameView: UIView {
 
 extension GameView: GameViewProtocol {
     func rotateBoard() {
+        let duration = PreferencesManager.shared.isRotationAnimated() ? PreferencesManager.shared.rotationAnimationDuration() : 0
         for row in rowStackView.arrangedSubviews {
             guard let spotStackView = row as? UIStackView else { return }
             for column in spotStackView.arrangedSubviews {
                 guard let button = column as? SpotButton else { continue }
-                button.rotate()
+                button.rotate(duration: duration)
             }
         }
     }
