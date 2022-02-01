@@ -14,7 +14,8 @@ final class GameAdapter {
     var didPrepareLayout = false
 
     var view: GameViewProtocol?
-    var controller: GenericViewController?
+    var viewController: GenericViewController?
+    var coordinator: GameCoordinatorProtocol?
     var brain: GameBrainProtocol?
 
     func prepareLayout() {
@@ -39,11 +40,21 @@ extension GameAdapter: GenericViewControllerDelegate {
     }
 
     func viewWillAppear() {
+        viewController?.navigationController?.isNavigationBarHidden = true
         setupBoard()
+    }
+
+    func viewWillDisappear() {
+        viewController?.navigationController?.isNavigationBarHidden = false
     }
 }
 
 extension GameAdapter: GameViewDelegate {
+    func didTapSettingsButton() {
+        viewController?.navigationController?.pushViewController(SettingsComposer.makeScene(), animated: true)
+        print("DID tap stuff")
+    }
+
     func didSelect(position: Position) {
         brain?.didSelect(position: position)
     }
@@ -56,5 +67,15 @@ extension GameAdapter: GameBrainDelegate {
 
     func rotateBoard() {
         view?.rotateBoard()
+    }
+}
+
+protocol GameCoordinatorProtocol {
+    func goToSettings()
+}
+
+struct GameCoordinator: GameCoordinatorProtocol {
+    func goToSettings() {
+        print("Going to settings!")
     }
 }

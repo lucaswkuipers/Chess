@@ -2,11 +2,21 @@ import UIKit
 
 protocol GameViewDelegate: AnyObject {
     func didSelect(position: Position)
+    func didTapSettingsButton()
 }
 
 final class GameView: UIView {
     weak var delegate: GameViewDelegate?
     private var board: [[Spot]] = []
+
+    private let settingsImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "gearshape.fill")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isUserInteractionEnabled = true
+        imageView.setImageTintColor(.label)
+        return imageView
+    }()
 
     private let boardView: UIView = {
         let view = UIView()
@@ -30,6 +40,7 @@ final class GameView: UIView {
         setupViewStyle()
         setupViewHierarchy()
         setupBoardView()
+        setupGestures()
     }
 
     required init?(coder: NSCoder) {
@@ -45,6 +56,7 @@ final class GameView: UIView {
     }
 
     private func setupViewHierarchy() {
+        addSubview(settingsImageView)
         addSubview(boardView)
         boardView.addSubview(rowStackView)
     }
@@ -53,6 +65,11 @@ final class GameView: UIView {
         let smallestDimension = min(frame.width, frame.height)
 
         NSLayoutConstraint.activate([
+            settingsImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+            settingsImageView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -20),
+            settingsImageView.widthAnchor.constraint(equalToConstant: 30),
+            settingsImageView.heightAnchor.constraint(equalToConstant: 30),
+
             boardView.centerYAnchor.constraint(equalTo: centerYAnchor),
             boardView.centerXAnchor.constraint(equalTo: centerXAnchor),
             boardView.heightAnchor.constraint(equalToConstant: smallestDimension - 15),
@@ -69,6 +86,11 @@ final class GameView: UIView {
         for rowNumber in 0..<8 {
             rowStackView.addArrangedSubview(makeColumnStackView(for: rowNumber))
         }
+    }
+
+    private func setupGestures() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapSettingsButton))
+        settingsImageView.addGestureRecognizer(tap)
     }
 
     private func renderPieces() {
@@ -100,6 +122,10 @@ final class GameView: UIView {
         button.addTarget(self, action: #selector(didTapBoardSpot(_:)), for: .touchUpInside)
         return button
     }
+
+    @objc func didTapSettingsButton() {
+        delegate?.didTapSettingsButton()
+    }
 }
 
 extension GameView: GameViewProtocol {
@@ -121,4 +147,13 @@ extension GameView: GameViewProtocol {
     func prepareLayout() {
         setupViewConstraints()
     }
+}
+
+extension UIImageView {
+
+func setImageTintColor(_ color: UIColor) {
+    let tintedImage = self.image?.withRenderingMode(.alwaysTemplate)
+    self.image = tintedImage
+    self.tintColor = color
+  }
 }

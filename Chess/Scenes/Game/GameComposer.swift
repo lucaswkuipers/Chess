@@ -1,7 +1,7 @@
 import UIKit
 
 struct GameComposer {
-    static func makeScreen() -> UIViewController {
+    static func makeScene() -> UIViewController {
         let view = GameView()
         let viewController = GenericViewController(with: view)
         let adapter = GameAdapter()
@@ -9,6 +9,7 @@ struct GameComposer {
 
         adapter.brain = brain
         adapter.view = view
+        adapter.viewController = viewController
 
         view.delegate = adapter
         viewController.delegate = adapter

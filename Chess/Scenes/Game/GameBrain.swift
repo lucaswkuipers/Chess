@@ -132,7 +132,7 @@ final class GameBrain: GameBrainProtocol {
         cleanPiece(from: origin)
         resetStates()
         origin = nil
-        printBoard() // log purposes (visualize what should be happening)
+//        printBoard() // log purposes (visualize what should be happening)
         currentPlayer = currentPlayer == .bottom ? .top : .bottom
         delegate?.setBoard(to: board)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
